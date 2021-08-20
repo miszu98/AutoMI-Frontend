@@ -1,0 +1,87 @@
+h1 {
+    color: #ff5200;
+    padding-top: 10%;
+    padding-left: 10%;
+    font-size: 230%;
+}
+
+.panel {
+    border-radius: 20%;
+    height: 600px;
+    width: 35%;
+    margin-left: 15%;
+    margin-top: 10%;
+}
+
+.window-name {
+    display: flex;
+    margin-top: 5%;
+}
+
+.fields {
+    margin-top: 5%;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+#person-icon {
+    padding-top: 8%;
+    margin-left: 2%;
+    float: left;
+    color: #ff5200;
+    font-size: 50px;
+}
+
+.mat-form-field {
+    width: 100%;
+}
+
+::ng-deep .mat-focused .mat-form-field-label {
+    color: #ff5200 !important;
+}
+  
+::ng-deep.mat-form-field-underline {
+    background-color: #ff5200 !important;
+} 
+  
+::ng-deep.mat-form-field-ripple {
+   background-color: #ff5200 !important;;
+}
+
+.mat-icon {
+      color: #ff5200;
+}
+
+.sign-in-bg {
+    margin-top: 15%;
+    float: right;
+    margin-right: 20%;
+}
+
+.mat-button {
+    color: white;
+    background-color: #ff5200;
+    width: 25%;
+}
+
+img {
+    width: 100%;
+    height: auto;
+  }
+
+.block {
+    display: flex;
+}
+
+span {
+    margin-left: 2%;
+}
+
+a {
+    text-decoration: none;
+    color: #ff5200;
+}
+
+.clickable {
+    margin-left: 10%;
+}
