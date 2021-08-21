@@ -15,4 +15,8 @@ export class SignInComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  public loadRegisterForm() {
+    console.log("hello");
+  }
+
 }
