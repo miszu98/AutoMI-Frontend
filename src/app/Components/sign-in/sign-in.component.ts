@@ -10,12 +10,21 @@ export class SignInComponent implements OnInit {
   isActive = true;
   hide = true;
 
+  loading = false;
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
   public loadRegisterForm() {
+    let panel = document.getElementById('sign-in-panel') as HTMLElement;
+
+    panel.style.backgroundColor = 'background-color: rgba(255, 255, 255, 0.1);';
+    panel.style.filter = 'blur(4px)';
+    
+    this.loading = true;
+
     console.log("hello");
   }
 

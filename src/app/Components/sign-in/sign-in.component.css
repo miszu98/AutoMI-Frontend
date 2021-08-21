@@ -6,6 +6,7 @@ h1 {
 }
 
 .panel {
+    background-color: white;
     border-radius: 20%;
     /* height: 600px; */
     height: auto;
@@ -92,5 +93,10 @@ a {
 
 a:hover {
     cursor: pointer;
+}
+
+#loading {
+    margin-top: 10%;
+    margin-left:13%;
 }
 
