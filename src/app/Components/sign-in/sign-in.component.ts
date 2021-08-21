@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-sign-in',
@@ -13,7 +14,7 @@ export class SignInComponent implements OnInit {
   loading = false;
   registerForm = false;
 
-  constructor() { }
+  constructor(private dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
@@ -67,7 +68,7 @@ export class SignInComponent implements OnInit {
   }
 
   public loadSupportDialog() {
-
+    
   }
 
   public loadContactDialog() {
@@ -77,5 +78,7 @@ export class SignInComponent implements OnInit {
   public loadTermsOfUseDialog() {
 
   }
+
+
 
 }
