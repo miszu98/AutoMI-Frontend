@@ -5,12 +5,11 @@
             <h1>Sign in</h1>
             <mat-icon id="person-icon">person</mat-icon>
         </div>
-    
         <div class="fields">
             <p>
                 <mat-form-field appearance="legacy">
                   <mat-label>Enter your email</mat-label>
-                  <input type="email" matInput>
+                  <input id='email' type="email" matInput [disabled]='isDisabled'>
                   <mat-icon style="margin-right: 20px;" matSuffix>alternate_email</mat-icon>
                   <mat-hint>Hint</mat-hint>
                 </mat-form-field>
@@ -18,24 +17,32 @@
               <p>
                 <mat-form-field appearance="fill">
                     <mat-label>Enter your password</mat-label>
-                    <input matInput [type]="hide ? 'password' : 'text'">
-                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <input matInput [type]="hide ? 'password' : 'text'" [disabled]='isDisabled'>
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide" [disabled]='isDisabled'>
                       <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                     </button>
                   </mat-form-field>
               </p>
         </div>
-        <div class="clickable">
+        <div id="clickable-elements" class="clickable">
             <p>
-              <a (click)="loadRegisterForm()">Don't have account? Register now</a>
+              <a id="register" (click)="loadRegisterForm()">Don't have account? Register now</a>
             </p>
-            <button mat-button>Sign in</button>
-            <a href="#">
-              <span>Forgotten Your Password?</span>
-            </a>
+            <button mat-button [disabled]='isDisabled'>Sign in</button>
+            <span>
+              <a id="forgot-password" (click)="loadForgotPassword()">Forgotten Your Password?</a>
+            </span>
+        </div>
+        <mat-spinner color="primary" id="spinner" *ngIf="loading" [diameter]="70"></mat-spinner>
+
+        <div class="info">
+          <ul>
+            <li><a (click)="loadSupportDialog()">Support</a></li>
+            <li><a (click)="loadContactDialog()">Contact</a></li>
+            <li><a (click)="loadTermsOfUseDialog()">Terms of use</a></li>
+          </ul>
         </div>
     </div>
-    
     <div class="sign-in-bg">
       <div class="row"><img  width="80%" src="assets/images/AutoMI-logo-v2.png" alt="Should here be image with text logo :("></div>
       <div class="row"><img  width="80%" style="margin-top: 15%;" src="assets/images/login-bg.png" alt="Should here be image with text logo :(">

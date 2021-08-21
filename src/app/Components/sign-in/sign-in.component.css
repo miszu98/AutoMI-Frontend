@@ -8,12 +8,12 @@ h1 {
 .panel {
     background-color: white;
     border-radius: 20%;
-    /* height: 600px; */
-    height: auto;
+    /* height: auto; */
     width: 50%;
     margin-left: 15%;
     margin-top: 10%;
     margin-bottom: 5%;
+
 }
 
 .window-name {
@@ -83,7 +83,8 @@ a {
 
 .clickable {
     margin-left: 10%;
-    margin-bottom: 25%;
+    margin-bottom: 17%;
+    /* margin-bottom: 5%; */
 }
 
 .img {
@@ -95,8 +96,21 @@ a:hover {
     cursor: pointer;
 }
 
-#loading {
-    margin-top: 10%;
-    margin-left:13%;
+#spinner {
+    margin-left: 42%;
+    margin-right: 42%;
+    margin-top: 5%;
+    margin-bottom: 5%;
 }
 
+::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
+    stroke: #ff5200;
+}
+.info {
+    text-align: center;
+}
+
+li {
+    display: inline-block;
+    margin-right: 10%;
+}
