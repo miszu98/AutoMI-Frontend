@@ -8,7 +8,7 @@ h1 {
 .panel {
     background-color: white;
     border-radius: 20%;
-    /* height: auto; */
+    height: auto;
     width: 50%;
     margin-left: 15%;
     margin-top: 10%;
