@@ -14,35 +14,39 @@
                   <mat-hint>Hint</mat-hint>
                 </mat-form-field>
               </p>
-              <p>
-                <mat-form-field appearance="fill">
-                    <mat-label>Enter your password</mat-label>
-                    <input matInput [type]="hide ? 'password' : 'text'">
-                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                    </button>
-                  </mat-form-field>
-              </p>
-              <p *ngIf="registerForm">
-                <mat-form-field appearance="fill">
-                    <mat-label>Repeat your password</mat-label>
-                    <input matInput [type]="hideSecond ? 'password' : 'text'">
-                    <button mat-icon-button matSuffix (click)="hideSecond = !hideSecond" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                    </button>
-                  </mat-form-field>
-              </p>
+              <div *ngIf="!forgotPassword">
+                <p>
+                  <mat-form-field appearance="fill">
+                      <mat-label>Enter your password</mat-label>
+                      <input matInput [type]="hide ? 'password' : 'text'">
+                      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                      </button>
+                    </mat-form-field>
+                </p>
+                <p *ngIf="flag">
+                  <mat-form-field appearance="fill">
+                      <mat-label>Repeat your password</mat-label>
+                      <input matInput [type]="hideSecond ? 'password' : 'text'">
+                      <button mat-icon-button matSuffix (click)="hideSecond = !hideSecond" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                      </button>
+                    </mat-form-field>
+                </p>
+              </div>
+             
         </div>
         <div id="clickable-elements" class="clickable">
-            <p *ngIf="!registerForm">
-              <a id="register" (click)="loadRegisterForm()">Don't have account? Register now</a>
+            <p *ngIf="!flag">
+              <a id="flag" (click)="loadRegisterForm()">Don't have account? Register now</a>
             </p>
-            <p *ngIf="registerForm">
+            <p *ngIf="flag">
               <a id="register" (click)="loadLoginForm()">You have an account? Sign in now</a>
             </p>
-            <button *ngIf="!registerForm" mat-button>Sign in</button>
-            <button *ngIf="registerForm" mat-button>Sign up</button>
-            <span *ngIf="!registerForm">
+            <button id='btnSignIn' *ngIf="!flag" mat-button>Sign in</button>
+            <button id='btnSignUp' *ngIf="flag" mat-button>Sign up</button>
+            <button *ngIf="forgotPassword" mat-button>Send</button>
+            <span *ngIf="!flag">
               <a id="forgot-password" (click)="loadForgotPassword()">Forgotten Your Password?</a>
             </span>
         </div>
