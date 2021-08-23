@@ -14,12 +14,17 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDialogModule } from '@angular/material/dialog';
 import { InformationsComponent } from './Components/Dialogs/informations/informations.component';
+import { MainComponent } from './Components/main/main.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
     AppComponent,
     SignInComponent,
-    InformationsComponent
+    InformationsComponent,
+    MainComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +36,10 @@ import { InformationsComponent } from './Components/Dialogs/informations/informa
     MatButtonModule,
     MatGridListModule,
     MatProgressSpinnerModule,
-    MatDialogModule
+    MatDialogModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]
