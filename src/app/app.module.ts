@@ -18,6 +18,7 @@ import { MainComponent } from './Components/main/main.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSelectModule } from '@angular/material/select';
+import { MatChipsModule } from '@angular/material/chips';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { MatSelectModule } from '@angular/material/select';
     MatDialogModule,
     MatToolbarModule,
     MatSidenavModule,
-    MatSelectModule
+    MatSelectModule,
+    MatChipsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
