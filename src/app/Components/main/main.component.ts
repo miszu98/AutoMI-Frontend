@@ -8,10 +8,13 @@ import { Component, OnInit } from '@angular/core';
 export class MainComponent implements OnInit {
 
   title = 'AutoMI';
+  showMenu = false;
 
   constructor() { }
 
   ngOnInit(): void {
   }
+
+
 
 }
