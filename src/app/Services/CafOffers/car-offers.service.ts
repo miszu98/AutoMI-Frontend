@@ -12,8 +12,8 @@ export class CarOffersService {
 
   constructor(private http: HttpClient) { }
 
-  public getAll() : Observable<Array<CarOffer>> {
-    return this.http.get<Array<CarOffer>>(this.URL);
+  public getAll(page: number, count: number) : Observable<Array<CarOffer>> {
+    return this.http.get<Array<CarOffer>>(this.URL + count + '/page=' + page + '/');
   }
   
 
