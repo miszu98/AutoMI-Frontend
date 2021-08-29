@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { CarOffer } from 'src/app/Models/CarOffer';
 import { Mark } from 'src/app/Models/Mark';
 import { Model } from 'src/app/Models/Model';
+import { CarOffersService } from 'src/app/Services/CafOffers/car-offers.service';
 import { MarksService } from 'src/app/Services/Marks/marks.service';
 import { ModelsService } from 'src/app/Services/Models/models.service';
 
@@ -13,19 +15,22 @@ export class MainComponent implements OnInit {
 
   title = 'AutoMI';
   showMenu = false;
+
   declare marks: Array<Mark>;
   declare models: Array<Model>;
-
-  declare chosenMark: Mark;
+  declare offers: Array<CarOffer>;
+  declare size: number;
 
   constructor(
     private markService: MarksService,
-    private modelService: ModelsService
+    private modelService: ModelsService,
+    private carOfferService: CarOffersService,
     ) { }
 
   ngOnInit(): void {
     this.loadMarks();
     this.loadModels();
+    this.initData(0, 10);
   }
 
   public loadMarks() {
@@ -59,6 +64,29 @@ export class MainComponent implements OnInit {
         console.log("Error while trying get all models by mark from database")
       }
     ); 
+  }
+
+  public loadOffers(event: any) {
+    this.carOfferService.getAll(event.pageIndex, event.pageSize).subscribe(
+      value => {
+        this.offers = value;
+      }, 
+      error => {
+        console.log("Error while trying get all offers from database")
+      }
+    );
+  }
+
+  public initData(page: number, size: number) {
+    this.carOfferService.getAll(page, size).subscribe(
+      value => {
+        this.offers = value;
+        console.log(this.offers);
+      }, 
+      error => {
+        console.log("Error while trying get all offers from database")
+      }
+    );
   }
 
 
