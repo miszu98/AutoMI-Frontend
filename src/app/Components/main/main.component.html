@@ -1,3 +1,24 @@
+<mat-toolbar color="primary">
+    <button (click)="drawer.toggle()" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+    <mat-icon>menu</mat-icon>
+    </button>
+    <span id="title"><b>{{ title }}</b></span>
+    <span class="example-spacer"></span>
+    <a [routerLink]="['/sign-in']" routerLinkActive="router-link-active" ><span>SIGN IN</span></a>
+    <a href="#"><span>FAQ</span></a>
+</mat-toolbar>
+
+<mat-drawer-container class="drawer-container" [hasBackdrop]="false" autosize>
+
+<mat-drawer #drawer class="sidenav" mode="over">
+        <div class="menu-option">
+            <a [routerLink]="['/my-offers']" routerLinkActive="router-link-active" ><p>My offers</p></a>
+        </div>
+        <div class="menu-option">
+            <a href="#"><p>Settings</p></a>
+        </div>
+</mat-drawer>
+
 
 <div class="filter">
     <div class="form">
@@ -63,16 +84,16 @@
 
 <div class="container">
      <div class="offers">
-        <div class="offer">
+        <div class="offer" *ngFor="let offer of offers">
             <img id="offer-image" width="30%" height="30%" src="assets/images/maxresdefault.jpg" alt="Here will be image of car">
             <div class="informations">
-                <h1 id="offer-title">Title</h1>
-                <span id="offer-description">Description</span>
+                <h1 id="offer-title">{{ offer.title }}</h1>
+                <span id="offer-description">{{ offer.description }}</span>
                 <mat-chip-list>
-                    <mat-chip>param 1</mat-chip>
-                    <mat-chip>param 2</mat-chip>
-                    <mat-chip>param 3</mat-chip>
-                    <mat-chip>param 4</mat-chip>
+                    <mat-chip>{{ offer.car.fuelType.fuelTypeName }}</mat-chip>
+                    <mat-chip>{{ offer.car.mileage }} km</mat-chip>
+                    <mat-chip>{{ offer.car.yearOfProduction }} km</mat-chip>
+                    <mat-chip>{{ offer.car.engineCapacity}} cm3</mat-chip>
                 </mat-chip-list>
                 <div class="localization">
                     <mat-icon>location_on</mat-icon>
@@ -80,7 +101,7 @@
                 </div>
             </div>
             <div class="price">
-                <h1>100 000</h1>
+                <h1>{{ offer.price }}</h1>
                 <span><b>PLN</b></span>
             </div>
         </div>
@@ -107,11 +128,36 @@
             </div>
         </div>
 
-        <mat-paginator id="paginator" [length]="100"
-            [pageSize]="10"
-            [pageSizeOptions]="[5, 10, 25, 100]"
-            aria-label="Select page">
+        <div class="offer">
+            <img id="offer-image" width="30%" height="30%" src="assets/images/maxresdefault.jpg" alt="Here will be image of car">
+            <div class="informations">
+                <h1 id="offer-title">Title</h1>
+                <span id="offer-description">Description</span>
+                <mat-chip-list>
+                    <mat-chip>param 1</mat-chip>
+                    <mat-chip>param 2</mat-chip>
+                    <mat-chip>param 3</mat-chip>
+                    <mat-chip>param 4</mat-chip>
+                </mat-chip-list>
+                <div class="localization">
+                    <mat-icon>location_on</mat-icon>
+                    <p>Piekary Śląskie</p>
+                </div>
+            </div>
+            <div class="price">
+                <h1>100 000</h1>
+                <span><b>PLN</b></span>
+            </div>
+        </div>
+
+        <mat-paginator id="paginator" [length]="size"
+            [pageSize]="1"
+            [pageSizeOptions]="[1, 2, 3, 4]"
+            aria-label="Select page"
+            (page)="loadOffers($event)">
         </mat-paginator>  
 
      </div>
 </div>
+
+</mat-drawer-container>
