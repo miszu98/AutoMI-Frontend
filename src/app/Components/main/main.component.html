@@ -57,11 +57,17 @@
         <mat-form-field appearance="fill">
             <mat-label>Driving gear</mat-label>
             <mat-select>
+                <mat-option *ngFor="let element of drivingGears" [value]="element.drivingGear">
+                    {{ element.drivingGear }}
+                </mat-option>
             </mat-select>
         </mat-form-field>
         <mat-form-field appearance="fill">
             <mat-label>Fuel type</mat-label>
             <mat-select>
+                <mat-option *ngFor="let element of fuelTypes" [value]="element.fuelTypeName">
+                    {{ element.fuelTypeName }}
+                </mat-option>
             </mat-select>
         </mat-form-field>
         <mat-form-field appearance="fill">
