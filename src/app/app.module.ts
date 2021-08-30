@@ -22,6 +22,8 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MyOffersComponent } from './Components/my-offers/my-offers.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CarOfferPipe } from './Pipes/CarOffer/car-offer.pipe';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { HttpClientModule } from '@angular/common/http';
     SignInComponent,
     InformationsComponent,
     MainComponent,
-    MyOffersComponent
+    MyOffersComponent,
+    CarOfferPipe
   ],
   imports: [
     HttpClientModule,
@@ -47,7 +50,9 @@ import { HttpClientModule } from '@angular/common/http';
     MatSidenavModule,
     MatSelectModule,
     MatChipsModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
