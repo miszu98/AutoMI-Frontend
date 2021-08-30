@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { CarOffer } from 'src/app/Models/CarOffer';
+import { CarOffer, Color } from 'src/app/Models/CarOffer';
 import { Mark } from 'src/app/Models/Mark';
 import { Model } from 'src/app/Models/Model';
 import { CarOffersService } from 'src/app/Services/CafOffers/car-offers.service';
+import { ColorsService } from 'src/app/Services/Colors/colors.service';
 import { MarksService } from 'src/app/Services/Marks/marks.service';
 import { ModelsService } from 'src/app/Services/Models/models.service';
 
@@ -25,24 +26,33 @@ export class MainComponent implements OnInit {
     'COMPACT'
   ]
 
+  carStates = [
+    'BRAND_NEW', 
+    'USED', 
+    'DAMAGED'
+  ]
+
   title = 'AutoMI';
   showMenu = false;
 
   declare marks: Array<Mark>;
   declare models: Array<Model>;
   declare offers: Array<CarOffer>;
+  declare colors: Array<Color>;
   declare size: number;
 
   constructor(
     private markService: MarksService,
     private modelService: ModelsService,
     private carOfferService: CarOffersService,
+    private colorService: ColorsService
     ) { }
 
   ngOnInit(): void {
     this.loadMarks();
     this.loadModels();
     this.initData(0, 10);
+    this.loadColors();
   }
 
   public loadMarks() {
@@ -85,6 +95,17 @@ export class MainComponent implements OnInit {
       }, 
       error => {
         console.log("Error while trying get all offers from database")
+      }
+    );
+  }
+
+  public loadColors() {
+    this.colorService.getAll().subscribe(
+      value => {
+        this.colors = value;
+      },
+      error => {
+        console.log("Error while trying get all colors from database");
       }
     );
   }
