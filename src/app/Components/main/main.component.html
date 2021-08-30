@@ -25,6 +25,9 @@
         <mat-form-field appearance="fill">
             <mat-label>Car type</mat-label>
             <mat-select>
+                <mat-option *ngFor="let type of carTypes" [value]=type>
+                    {{ type }}
+                </mat-option>
             </mat-select>
         </mat-form-field>
         <mat-form-field appearance="fill">

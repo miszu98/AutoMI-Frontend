@@ -13,6 +13,18 @@ import { ModelsService } from 'src/app/Services/Models/models.service';
 })
 export class MainComponent implements OnInit {
 
+  carTypes = [
+    'COUPE',
+    'SEDAN',
+    'WAGON',
+    'HATCHBACK',
+    'TRUCK',
+    'SUV',
+    'CABRIOLET',
+    'MINIVAN',
+    'COMPACT'
+  ]
+
   title = 'AutoMI';
   showMenu = false;
 
