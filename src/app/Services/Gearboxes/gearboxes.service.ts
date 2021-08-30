@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Gearbox } from 'src/app/Models/CarOffer';
+import { Gearbox } from 'src/app/Models/Gearbox';
 
 @Injectable({
   providedIn: 'root'
