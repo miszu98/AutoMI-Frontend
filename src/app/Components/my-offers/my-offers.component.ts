@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./my-offers.component.css']
 })
 export class MyOffersComponent implements OnInit {
+  
+  title = "AutoMI";
 
   constructor() { }
 
