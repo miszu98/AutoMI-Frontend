@@ -1,7 +1,11 @@
+import { i18nMetaToJSDoc } from '@angular/compiler/src/render3/view/i18n/meta';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/Services/Auth/auth.service';
+import { ShareDataService } from 'src/app/Services/ShareData/share-data.service';
+import { TokenStorageService } from 'src/app/Services/TokenStorage/token-storage.service';
 import { InformationsComponent } from '../Dialogs/informations/informations.component';
 
 const PASSWORD_PATTERN = '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_=+<>/~])[a-zA-Z0-9!@#$%^&*()_=+<>/~]{8,30}';
@@ -20,13 +24,15 @@ export class SignInComponent implements OnInit {
   flag = false;
   forgotPassword = false;
 
+  loginFailStatusMessage = false;
+
   loginForm = new FormGroup({
     email : new FormControl('', [Validators.required, Validators.email]),
     password : new FormControl('', [Validators.required, Validators.pattern(PASSWORD_PATTERN)]),
     password2 : new FormControl('', Validators.required)
   });
 
-  constructor(private dialog: MatDialog, private authService: AuthService) { }
+  constructor(private dialog: MatDialog, private authService: AuthService, private router: Router, private tokenStorage: TokenStorageService, private shareDataService: ShareDataService) { }
 
   ngOnInit(): void {
   }
@@ -129,8 +135,16 @@ export class SignInComponent implements OnInit {
       this.authService.login({email: email?.value, password: password?.value}).subscribe(
         value => {
           console.log(value);
+          this.tokenStorage.saveToken(value.token);
+          this.tokenStorage.saveUser(value);
+          this.shareDataService.setLoggedIn(true);
+          this.shareDataService.setLoginFailed(false);
+          this.shareDataService.setRole(this.tokenStorage.getUser().role);
+          this.router.navigate(['/main']);
+          this.loginFailStatusMessage = false;
         },
         error => {
+          this.loginFailStatusMessage = true;
           console.log(error);
         }
       )
