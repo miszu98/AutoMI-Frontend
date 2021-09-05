@@ -52,6 +52,8 @@ a {
     border: 1px solid rgb(211, 211, 211);
     margin-bottom: 1%;
     border-radius: 10px;
+    width: 100%;
+    height: auto;
 }
 
 #offer-image {
@@ -70,24 +72,32 @@ a {
 }
 
 .mat-chip {
-    margin-top: 5% !important;
+    margin-top: 2% !important;
     background-color: #ff5200;
     color: white;
     user-select: none;
     margin-bottom: 5% !important;
 }
 
-.price {
-    margin-top: 1%;
 
-    padding-right: 4%;
-    margin-left: 20%;
+.details {
+    /* width: 220%; */
+    width: 400%;
+    height: 40%;
+}
+
+.price {
+    height: 0%;
+    margin-top: 1%;
     color: #ff5200;
     display: flex;
+    margin-left: 30%;
+    margin-right: 2%;
 }
 
 .localization {
     display: flex;
+    width: 150%;
 }
 
 .localization p {

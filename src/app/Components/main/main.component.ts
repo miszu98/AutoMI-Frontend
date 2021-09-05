@@ -47,7 +47,14 @@ export class MainComponent implements OnInit {
   declare gearboxes: Array<Gearbox>;
   declare fuelTypes: Array<FuelType>;
   declare drivingGears: Array<DrivingGear>;
-  declare size: number;
+
+  size: number = 10;
+  page: number = 0;
+
+
+  params = new Map<string, number>();
+
+  
 
   constructor(
     private markService: MarksService,
@@ -62,7 +69,7 @@ export class MainComponent implements OnInit {
   ngOnInit(): void {
     this.loadMarks();
     this.loadModels();
-    this.initData(0, 10);
+    this.filter({});
     this.loadColors();
     this.loadGearboxes();
     this.loadFuelTypes();
@@ -92,9 +99,10 @@ export class MainComponent implements OnInit {
   }
 
   public loadCorrectModels(value: any) {
-    this.markService.getAllModelsByMark(value).subscribe(
-      value => {
-        this.models = value;
+    this.markService.getAllModelsByMark(value.mark).subscribe(
+      respone => {
+        this.models = respone;
+        this.updateFilter('mark', value);
       },
       error => {
         console.log("Error while trying get all models by mark from database");
@@ -102,16 +110,26 @@ export class MainComponent implements OnInit {
     ); 
   }
 
-  public loadOffers(event: any) {
-    this.carOfferService.getAll(event.pageIndex, event.pageSize).subscribe(
-      value => {
-        this.offers = value;
-      }, 
-      error => {
-        console.log("Error while trying get all offers from database");
-      }
-    );
+  public updateFilter(name: string, param: any) {
+      this.params.set(name, param.id);
+      let json : { [key: string]: number } = {};
+      this.params.forEach((value, key) => {
+        json[key] = value;
+      });
+      this.filter(json);
+      console.log(json)
   }
+
+  // public loadOffers(event: any) {
+  //   this.carOfferService.getAll(event.pageIndex, event.pageSize).subscribe(
+  //     value => {
+  //       this.offers = value;
+  //     }, 
+  //     error => {
+  //       console.log("Error while trying get all offers from database");
+  //     }
+  //   );
+  // }
 
   public loadColors() {
     this.colorService.getAll().subscribe(
@@ -157,8 +175,39 @@ export class MainComponent implements OnInit {
     );
   }
 
-  public initData(page: number, size: number) {
-    this.carOfferService.getAll(page, size).subscribe(
+  // public initData(page: number, size: number) {
+  //   this.carOfferService.getAll(page, size).subscribe(
+  //     value => {
+  //       this.offers = value;
+  //     }, 
+  //     error => {
+  //       console.log("Error while trying get all offers from database");
+  //     }
+  //   );
+  // }
+
+
+  public filter(params: any) {
+    this.carOfferService.filter(params, this.page, this.size).subscribe(
+      value => {
+        this.offers = value;
+      },
+      error => {
+        console.log("błąd filtrowania");
+      }
+    );
+  }
+
+  public loadPaginationData(event: any) {
+    this.size = event.pageSize;
+    this.page = event.pageIndex;
+
+    let json: {[key: string]: number} = {};
+    this.params.forEach((value, key) => {
+      json[key] = value;
+    });
+
+    this.carOfferService.filter(json, this.page, this.size).subscribe(
       value => {
         this.offers = value;
       }, 
@@ -168,6 +217,9 @@ export class MainComponent implements OnInit {
     );
   }
 
-
+  public clearFilters() {
+    this.params = new Map<string, number>();
+    this.filter({});
+  }
 
 }

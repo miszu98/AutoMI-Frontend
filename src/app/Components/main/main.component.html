@@ -33,39 +33,39 @@
         <mat-form-field appearance="fill">
             <mat-label>Mark</mat-label>
             <mat-select (valueChange)="loadCorrectModels($event)">
-                <mat-option *ngFor="let element of marks" [value]="element.mark">
+                <mat-option *ngFor="let element of marks" [value]="element">
                     {{ element.mark }}
                 </mat-option>
             </mat-select>
         </mat-form-field>
         <mat-form-field appearance="fill">
             <mat-label>Model</mat-label>
-            <mat-select>
-                <mat-option *ngFor="let element of models" [value]='element.model'>
+            <mat-select (valueChange)="updateFilter('model', $event)">
+                <mat-option *ngFor="let element of models" [value]='element'>
                     {{ element.model }}
                 </mat-option>
             </mat-select>
         </mat-form-field>
         <mat-form-field appearance="fill">
             <mat-label>Gearbox</mat-label>
-            <mat-select>
-                <mat-option *ngFor="let element of gearboxes" [value]="element.gearbox">
+            <mat-select (valueChange)="updateFilter('gearbox', $event)">
+                <mat-option *ngFor="let element of gearboxes" [value]="element">
                     {{ element.gearbox }}
                 </mat-option>
             </mat-select>
         </mat-form-field>
         <mat-form-field appearance="fill">
             <mat-label>Driving gear</mat-label>
-            <mat-select>
-                <mat-option *ngFor="let element of drivingGears" [value]="element.drivingGear">
+            <mat-select (valueChange)="updateFilter('drivingGear', $event)">
+                <mat-option *ngFor="let element of drivingGears" [value]="element">
                     {{ element.drivingGear }}
                 </mat-option>
             </mat-select>
         </mat-form-field>
         <mat-form-field appearance="fill">
             <mat-label>Fuel type</mat-label>
-            <mat-select>
-                <mat-option *ngFor="let element of fuelTypes" [value]="element.fuelTypeName">
+            <mat-select (valueChange)="updateFilter('fuelType', $event)">
+                <mat-option *ngFor="let element of fuelTypes" [value]="element">
                     {{ element.fuelTypeName }}
                 </mat-option>
             </mat-select>
@@ -94,6 +94,7 @@
             </mat-select>
         </mat-form-field>
         <button id="btn-filter" mat-button>FILTR</button>
+        <button id="btn-filter" mat-button (click)="clearFilters()">CLEAR</button>
     </div>
  </div>
 
@@ -106,7 +107,6 @@
                 <span id="offer-description">{{ offer.description }}</span>
                 <mat-chip-list>
                     <mat-chip>{{ offer.car.fuelType.fuelTypeName }}</mat-chip>
-                    <mat-chip>{{ offer.car.mileage }} km</mat-chip>
                     <mat-chip>{{ offer.car.yearOfProduction }} km</mat-chip>
                     <mat-chip>{{ offer.car.engineCapacity}} cm3</mat-chip>
                 </mat-chip-list>
@@ -126,50 +126,39 @@
             <div class="informations">
                 <h1 id="offer-title">Title</h1>
                 <span id="offer-description">Description</span>
-                <mat-chip-list>
-                    <mat-chip>param 1</mat-chip>
-                    <mat-chip>param 2</mat-chip>
-                    <mat-chip>param 3</mat-chip>
-                    <mat-chip>param 4</mat-chip>
-                </mat-chip-list>
+                
+                <div class="details">   
+                    <mat-chip-list>
+                        <mat-chip>param 1</mat-chip>
+                        <mat-chip>param 2</mat-chip>
+                        <mat-chip>param 3</mat-chip>
+                        <mat-chip>param 4</mat-chip>
+                    </mat-chip-list>
+                </div>
+
                 <div class="localization">
                     <mat-icon>location_on</mat-icon>
                     <p>Piekary Śląskie</p>
                 </div>
+
             </div>
             <div class="price">
-                <h1>100 000</h1>
+                <h1>100000</h1>
                 <span><b>PLN</b></span>
             </div>
+            
         </div>
-
-        <div class="offer">
-            <img id="offer-image" width="30%" height="30%" src="assets/images/maxresdefault.jpg" alt="Here will be image of car">
-            <div class="informations">
-                <h1 id="offer-title">Title</h1>
-                <span id="offer-description">Description</span>
-                <mat-chip-list>
-                    <mat-chip>param 1</mat-chip>
-                    <mat-chip>param 2</mat-chip>
-                    <mat-chip>param 3</mat-chip>
-                    <mat-chip>param 4</mat-chip>
-                </mat-chip-list>
-                <div class="localization">
-                    <mat-icon>location_on</mat-icon>
-                    <p>Piekary Śląskie</p>
-                </div>
-            </div>
-            <div class="price">
-                <h1>100 000</h1>
-                <span><b>PLN</b></span>
-            </div>
-        </div>
-
-        <mat-paginator id="paginator" [length]="size"
-            [pageSize]="1"
-            [pageSizeOptions]="[1, 2, 3, 4]"
+        <!-- <mat-paginator id="paginator" [length]="50"
+            [pageSize]="10"
+            [pageSizeOptions]="[5, 1, 2, 20, 25]"
             aria-label="Select page"
             (page)="loadOffers($event)">
+        </mat-paginator>   -->
+        <mat-paginator id="paginator" [length]="50"
+            [pageSize]="10"
+            [pageSizeOptions]="[1, 2, 5, 10, 20, 25]"
+            aria-label="Select page"
+            (page)="loadPaginationData($event)">
         </mat-paginator>  
 
      </div>
