@@ -16,5 +16,8 @@ export class CarOffersService {
     return this.http.get<Array<CarOffer>>(this.URL + count + '/page=' + page + '/');
   }
   
+  public filter(params: any, page: number, size: number) : Observable<Array<CarOffer>> {
+    return this.http.post<Array<CarOffer>>(this.URL + 'filter/' + size + '/page=' + page, params);
+  }
 
 }
