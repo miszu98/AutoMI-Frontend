@@ -27,6 +27,7 @@
                       </button>
                     </mat-form-field>
                 </p>
+                <p *ngIf="loginFailStatusMessage" style="color: red;">Wrong email or password</p>
                 <p *ngIf="flag">
                   <mat-form-field appearance="fill">
                       <mat-label>Repeat your password</mat-label>

@@ -11,6 +11,8 @@ import { FuelTypesService } from 'src/app/Services/FuelTypes/fuel-types.service'
 import { GearboxesService } from 'src/app/Services/Gearboxes/gearboxes.service';
 import { MarksService } from 'src/app/Services/Marks/marks.service';
 import { ModelsService } from 'src/app/Services/Models/models.service';
+import { ShareDataService } from 'src/app/Services/ShareData/share-data.service';
+import { TokenStorageService } from 'src/app/Services/TokenStorage/token-storage.service';
 
 @Component({
   selector: 'app-main',
@@ -64,6 +66,8 @@ export class MainComponent implements OnInit {
     private gearboxesService: GearboxesService,
     private fuelTypesService: FuelTypesService,
     private drivingGearService: DrivingGearsService,
+    private shareDataService: ShareDataService,
+    private tokenStorageService: TokenStorageService
     ) { }
 
   ngOnInit(): void {
@@ -74,6 +78,24 @@ export class MainComponent implements OnInit {
     this.loadGearboxes();
     this.loadFuelTypes();
     this.loadDrivingGears();
+
+    setTimeout(() => this.trigerMenu(), 150);
+  }
+
+  public trigerMenu() {
+    let element = document.getElementById('toggle');
+    element?.click();
+  }
+
+  public getLoggedIn(): string | null {
+    console.log(this.shareDataService.getLoggedIn());
+    return this.shareDataService.getLoggedIn();
+  }
+
+  public logout() {
+    this.shareDataService.setLoggedIn(false);
+    this.shareDataService.setRole('');
+    this.tokenStorageService.signOut();
   }
 
   public loadMarks() {

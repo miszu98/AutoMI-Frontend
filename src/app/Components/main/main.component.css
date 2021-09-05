@@ -16,7 +16,8 @@ a {
 
 .container {
     margin-left: 20%;
-    margin-right: 20%;
+    /* margin-right: 20%; */
+    margin-right: 2%;
 }
 
 .mat-form-field {
@@ -44,7 +45,8 @@ a {
 .offers {
     margin-top: 5%;
     margin-left: 1%;
-    width: 95%;
+    /* width: 95%; */
+    width: 100%;
 }
 
 .offer {
@@ -160,4 +162,27 @@ a {
 
 .drawer-container {
     background-color: white;
+    
+}
+
+#paginator {
+    margin-bottom: 23%;
+}
+
+.newest-offers {
+    border: #ff5200 1px solid;
+    border-radius: 5px;
+    width: 30%;
+    margin-left: 2%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+
+.content {
+    display: flex;
+}
+
+.new-offer {
+    padding: 5%;
 }
