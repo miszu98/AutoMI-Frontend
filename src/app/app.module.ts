@@ -24,6 +24,7 @@ import { MyOffersComponent } from './Components/my-offers/my-offers.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CarOfferPipe } from './Pipes/CarOffer/car-offer.pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatChipsModule,
     MatPaginatorModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

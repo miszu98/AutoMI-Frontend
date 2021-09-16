@@ -20,4 +20,8 @@ export class CarOffersService {
     return this.http.post<Array<CarOffer>>(this.URL + 'filter/' + size + '/page=' + page, params);
   }
 
+  public create() {
+    
+  }
+
 }
