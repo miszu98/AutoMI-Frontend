@@ -30,5 +30,179 @@ a {
 }
 
 .drawer-container {
-    background-color: black;
+    background-color: white;
+    height: 100%;
+}
+
+.container {
+    background-color: white;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+::ng-deep .mat-tab-group.mat-primary .mat-ink-bar {
+    background-color: #ff5200 !important;
+    width: 50%;
+}
+
+::ng-deep.mat-tab-label, ::ng-deep.mat-tab-label-active{
+    min-width: 49%!important;
+    padding: 3px!important;
+    margin-right: 2%!important;
+}
+
+.container {
+    margin-top: 3%;
+}
+
+.my-offers {
+    margin-top: 3%;
+    background-color: chartreuse;
+}
+
+.add-new-offer {
+    margin-top: 3%;
+    /* height: 1900px; */
+    height: auto;
+    margin-bottom: 15%;
+}
+
+#title-f {
+    width: 70%;
+    margin-right: 2%;
+}
+
+#loc-f {
+    width: 30%;
+}
+
+
+.title-and-city {
+    display: flex;
+}
+
+::ng-deep .mat-focused .mat-form-field-label {
+    color: #ff5200 !important;
+}
+  
+::ng-deep .mat-form-field-underline {
+    background-color: #ff5200 !important;
+} 
+  
+::ng-deep .mat-form-field-ripple {
+   background-color: #ff5200 !important;;
+}
+
+::ng-deep .mat-select-arrow {
+    color: #ff5200 !important;
+}
+
+#detail {
+    width: 31.5%;
+    margin-right: 1%;
+    /* margin-top: 1%; */
+}
+
+#desc {
+    width: 60%;
+    /* margin-top: 7.4%; */
+    /* padding-top: 7.5%; */
+    margin-top: 7%;
+    padding-right: 2%;
+    /* padding-bottom: 2%; */
+}
+
+.car-details {
+    padding-left: 2%;
+    /* padding-top: 1%; */
+    padding-bottom: 2%;
+    width: 82%;
+    margin-top: 3%;
+}
+
+.details {
+    border-radius: 15px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #ff5200;
+    display: flex;
+}
+
+.offer-images {
+    margin-top: 2%;
+    border-radius: 15px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #ff5200;
+    display: flex;
+}
+
+.upload-images {
+    padding: 2%;
+}
+
+.mat-button {
+    margin-top: 2%;
+    color: white;
+    background-color: #ff5200;
+    width: 25%;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.custom-image-choose {
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    /* height: 23px; */
+}
+
+
+.preview-images {
+    margin-top: 3%;
+    /* margin-right: 1%; */
+}
+
+#preview {
+    margin-right: 1%;
+    border-radius: 5px;
+}
+
+.mat-drawer-container {
+    height: auto;
+    overflow-y: hidden;
+}
+
+#warning {
+    color: red;
+    font-size: 250%;
+    animation:error 2s infinite;
+    -webkit-animation:error 2s infinite;
+}
+
+.img-btns {
+    display: flex;
+}
+
+.img-error {
+    display: flex;
+}
+
+.price-input {
+    text-align: right;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  display: none;
+}
+
+@keyframes error {
+    0% { opacity: 0%; } 
+    100% { opacity:100%; } 
+
 }

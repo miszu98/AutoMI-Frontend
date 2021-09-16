@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CarOffer, Color, FuelType } from 'src/app/Models/CarOffer';
+import { CarType } from 'src/app/Models/CarType';
 import { DrivingGear } from 'src/app/Models/DrivingGear';
 import { Gearbox } from 'src/app/Models/Gearbox';
 import { Mark } from 'src/app/Models/Mark';
 import { Model } from 'src/app/Models/Model';
+import { State } from 'src/app/Models/State';
 import { CarOffersService } from 'src/app/Services/CafOffers/car-offers.service';
 import { ColorsService } from 'src/app/Services/Colors/colors.service';
 import { DrivingGearsService } from 'src/app/Services/DrivingGears/driving-gears.service';
@@ -21,22 +23,22 @@ import { TokenStorageService } from 'src/app/Services/TokenStorage/token-storage
 })
 export class MainComponent implements OnInit {
 
-  carTypes = [
-    'COUPE',
-    'SEDAN',
-    'WAGON',
-    'HATCHBACK',
-    'TRUCK',
-    'SUV',
-    'CABRIOLET',
-    'MINIVAN',
-    'COMPACT'
+  carTypes: Array<CarType> = [
+    {name: 'COUPE', id: 0},
+    {name: 'SEDAN', id: 1},
+    {name: 'WAGON', id: 2},
+    {name: 'HATCHBACK', id: 3},
+    {name: 'TRUCK', id: 4},
+    {name: 'SUV', id: 5},
+    {name: 'CABRIOLET', id: 6},
+    {name: 'MINIVAN', id: 7},
+    {name: 'COMPACT', id: 8}
   ]
 
-  carStates = [
-    'BRAND_NEW', 
-    'USED', 
-    'DAMAGED'
+  carStates: Array<State> = [
+    {name: 'BRAND_NEW', id: 0}, 
+    {name: 'USED', id: 1}, 
+    {name: 'DAMAGED', id: 2}
   ]
 
   title = 'AutoMI';
