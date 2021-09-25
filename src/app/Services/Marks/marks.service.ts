@@ -19,7 +19,10 @@ export class MarksService {
   }
 
   public getAllModelsByMark(mark: string) : Observable<Array<Model>> {
-    return this.http.get<Array<Model>>(this.URL + mark);
+    return this.http.get<Array<Model>>(this.URL + mark + '/name');
   }
 
+  public getAllModelsByMarkId(id: number) : Observable<Array<Model>> {
+    return this.http.get<Array<Model>>(this.URL + id);
+  }
 }
