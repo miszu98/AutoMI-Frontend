@@ -25,6 +25,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { CarOfferPipe } from './Pipes/CarOffer/car-offer.pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatCardModule } from '@angular/material/card';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { OfferDetailsComponent } from './Components/OfferDetails/offer-details/offer-details.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +37,8 @@ import { MatTabsModule } from '@angular/material/tabs';
     InformationsComponent,
     MainComponent,
     MyOffersComponent,
-    CarOfferPipe
+    CarOfferPipe,
+    OfferDetailsComponent
   ],
   imports: [
     HttpClientModule,
@@ -54,7 +59,10 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatPaginatorModule,
     FormsModule,
     ReactiveFormsModule,
-    MatTabsModule
+    MatTabsModule,
+    MatCardModule,
+    MatExpansionModule,
+    MatSlideToggleModule
   ],
   providers: [],
   bootstrap: [AppComponent]
