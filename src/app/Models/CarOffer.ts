@@ -1,5 +1,8 @@
+import { CarType } from "./CarType";
+import { Image } from "./Image";
 import { Mark } from "./Mark";
 import { Model } from "./Model";
+import { State } from "./State";
 
 export interface FuelType {
     id: number;
@@ -22,6 +25,7 @@ export interface DrivingGear {
 }
 
 export interface Car {
+    id: number;
     mark: Mark;
     model: Model;
     fuelType: FuelType;
@@ -29,8 +33,8 @@ export interface Car {
     engineCapacity: number;
     gearbox: Gearbox;
     color: Color;
-    state: number;
-    carType: number;
+    state: State;
+    carType: CarType;
     mileage: number;
     drivingGear: DrivingGear;
     yearOfProduction: string;
@@ -41,11 +45,15 @@ export interface User {
 }
 
 export interface CarOffer {
+    id: number;
     title: string;
     description: string;
     car: Car;
     user: User;
     price: number;
+    city: string;
+    images: Array<Image>;
+    createdAt: string;
 }
 
 

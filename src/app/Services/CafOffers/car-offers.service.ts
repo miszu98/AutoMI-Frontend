@@ -20,8 +20,20 @@ export class CarOffersService {
     return this.http.post<Array<CarOffer>>(this.URL + 'filter/' + size + '/page=' + page, params);
   }
 
-  public create() {
-    
+  public add(offer: any) {
+    return this.http.post<any>(this.URL, offer);
+  }
+
+  public getOffersByUser(id: number) {
+    return this.http.get<Array<CarOffer>>(this.URL + id + '/user/');
+  }
+
+  public delete(id: number) {
+    return this.http.delete<CarOffer>(this.URL + id);
+  }
+
+  public update(id: number, updatedOffer: any) {
+    return this.http.put<CarOffer>(this.URL + id,  updatedOffer);
   }
 
 }
