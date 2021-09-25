@@ -29,6 +29,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { OfferDetailsComponent } from './Components/OfferDetails/offer-details/offer-details.component';
+import { MatCarouselModule } from '@ngmodule/material-carousel';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { OfferDetailsComponent } from './Components/OfferDetails/offer-details/o
     MatTabsModule,
     MatCardModule,
     MatExpansionModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatCarouselModule
   ],
   providers: [],
   bootstrap: [AppComponent]
