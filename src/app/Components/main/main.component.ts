@@ -1,3 +1,4 @@
+import { CurrencyPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { CarOffer, Color, FuelType } from 'src/app/Models/CarOffer';
 import { CarType } from 'src/app/Models/CarType';
@@ -6,6 +7,7 @@ import { Gearbox } from 'src/app/Models/Gearbox';
 import { Mark } from 'src/app/Models/Mark';
 import { Model } from 'src/app/Models/Model';
 import { State } from 'src/app/Models/State';
+import { CarOfferPipe } from 'src/app/Pipes/CarOffer/car-offer.pipe';
 import { CarOffersService } from 'src/app/Services/CafOffers/car-offers.service';
 import { ColorsService } from 'src/app/Services/Colors/colors.service';
 import { DrivingGearsService } from 'src/app/Services/DrivingGears/driving-gears.service';
@@ -22,6 +24,17 @@ import { TokenStorageService } from 'src/app/Services/TokenStorage/token-storage
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
+  cities: Array<any> = [
+    {name: 'Katowice'}, 
+    {name: 'Bytom'}, 
+    {name: 'Chorzów'}
+  ];
+
+  powerRange: Array<number> = [
+    50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900, 950, 1000
+  ];
+
+  engineCapacity: Array<number> = [];
 
   carTypes: Array<CarType> = [
     {name: 'COUPE', id: 0},
@@ -47,16 +60,19 @@ export class MainComponent implements OnInit {
   declare marks: Array<Mark>;
   declare models: Array<Model>;
   declare offers: Array<CarOffer>;
+  declare newestOffers: Array<CarOffer>;
   declare colors: Array<Color>;
   declare gearboxes: Array<Gearbox>;
   declare fuelTypes: Array<FuelType>;
   declare drivingGears: Array<DrivingGear>;
 
+  offersCount: string = "0";
+
   size: number = 10;
   page: number = 0;
 
 
-  params = new Map<string, number>();
+  params = new Map<string, object>();
 
   
 
@@ -69,7 +85,9 @@ export class MainComponent implements OnInit {
     private fuelTypesService: FuelTypesService,
     private drivingGearService: DrivingGearsService,
     private shareDataService: ShareDataService,
-    private tokenStorageService: TokenStorageService
+    private tokenStorageService: TokenStorageService,
+    private carOfferPipe: CarOfferPipe,
+    private currencyPipe: CurrencyPipe
     ) { }
 
   ngOnInit(): void {
@@ -80,8 +98,41 @@ export class MainComponent implements OnInit {
     this.loadGearboxes();
     this.loadFuelTypes();
     this.loadDrivingGears();
+    this.loadNewestOffers();
+    this.fillEngineCapacityData();
 
     setTimeout(() => this.trigerMenu(), 150);
+  }
+
+  public fillEngineCapacityData() {
+    for (let i = 900; i < 7000; i += 100) {
+      this.engineCapacity.push(i);
+    }
+  }
+
+  
+
+  public loadOfferDetails(offerId: number) {
+    window.location.href = 'http://localhost:4200/' + offerId + '/offer';
+  }
+
+  public loadNewestOffers() {
+    this.carOfferService.getNewestOffers().subscribe(
+      value => {
+        this.newestOffers = value;
+      }, 
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+  public modifyOfferDescription(desc: string): string {
+    return this.carOfferPipe.transform(desc);
+  }
+
+  public modifyPrice(price: number) {
+    return this.currencyPipe.transform(price, '');
   }
 
   public trigerMenu() {
@@ -136,7 +187,17 @@ export class MainComponent implements OnInit {
 
   public updateFilter(name: string, param: any) {
       this.params.set(name, param.id);
-      let json : { [key: string]: number } = {};
+      let json : { [key: string]: object } = {};
+      this.params.forEach((value, key) => {
+        json[key] = value;
+      });
+      this.filter(json);
+      console.log(json)
+  }
+
+  public updateFilterTextValues(name: string, param: any) {
+    this.params.set(name, param);
+      let json : { [key: string]: object } = {};
       this.params.forEach((value, key) => {
         json[key] = value;
       });
@@ -214,7 +275,9 @@ export class MainComponent implements OnInit {
   public filter(params: any) {
     this.carOfferService.filter(params, this.page, this.size).subscribe(
       value => {
-        this.offers = value;
+        this.offers = value.offers;
+        this.offersCount = value.size.toString();
+        console.log(this.offers);
       },
       error => {
         console.log("błąd filtrowania");
@@ -226,14 +289,14 @@ export class MainComponent implements OnInit {
     this.size = event.pageSize;
     this.page = event.pageIndex;
 
-    let json: {[key: string]: number} = {};
+    let json: {[key: string]: object} = {};
     this.params.forEach((value, key) => {
       json[key] = value;
     });
 
     this.carOfferService.filter(json, this.page, this.size).subscribe(
       value => {
-        this.offers = value;
+        this.offers = value.offers;
       }, 
       error => {
         console.log("Error while trying get all offers from database");
@@ -242,8 +305,9 @@ export class MainComponent implements OnInit {
   }
 
   public clearFilters() {
-    this.params = new Map<string, number>();
+    this.params = new Map<string, object>();
     this.filter({});
+    window.location.href = 'http://localhost:4200/main'
   }
 
 }

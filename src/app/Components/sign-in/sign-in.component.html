@@ -38,6 +38,12 @@
                       </button>
                     </mat-form-field>
                 </p>
+                <div style="color: red;" *ngIf="!samePassword">
+                  Password must be the same
+              </div>
+              <div *ngIf="userAlreadyExists" style="color: red;">
+                  User with this email already exists
+              </div>
               </div>
             </form>
         </div>

@@ -83,7 +83,7 @@ export class MyOffersComponent implements OnInit {
   offerForm = new FormGroup({
     title: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(15)]),
     city: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]),
-    description: new FormControl('', [Validators.required, Validators.minLength(50), Validators.maxLength(512)]),
+    description: new FormControl('', [Validators.required, Validators.minLength(50), Validators.maxLength(5000)]),
     price: new FormControl('', Validators.required),
     power: new FormControl('', Validators.required),
     engineCapacity: new FormControl('', Validators.required),
@@ -288,6 +288,7 @@ export class MyOffersComponent implements OnInit {
     if (this.images.length == 0) {
       this.imgError = true;
       this.imgErrorMessage = "You can't create offer with 0 images";
+      return;
     } else {
       this.imgError = false;
     }

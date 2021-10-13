@@ -1,4 +1,3 @@
-import { i18nMetaToJSDoc } from '@angular/compiler/src/render3/view/i18n/meta';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -8,7 +7,7 @@ import { ShareDataService } from 'src/app/Services/ShareData/share-data.service'
 import { TokenStorageService } from 'src/app/Services/TokenStorage/token-storage.service';
 import { InformationsComponent } from '../Dialogs/informations/informations.component';
 
-const PASSWORD_PATTERN = '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_=+<>/~])[a-zA-Z0-9!@#$%^&*()_=+<>/~]{8,30}';
+const PASSWORD_PATTERN = '(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z])(?=.*[!?.,;!@#$%^&*])[a-zA-Z0-9!?.,;!@#$%^&*]{8,30}';
 
 @Component({
   selector: 'app-sign-in',
@@ -23,6 +22,8 @@ export class SignInComponent implements OnInit {
   loading = false;
   flag = false;
   forgotPassword = false;
+  samePassword = true;
+  userAlreadyExists = false;
 
   loginFailStatusMessage = false;
 
@@ -73,6 +74,9 @@ export class SignInComponent implements OnInit {
     let icon = document.getElementById('person-icon') as HTMLElement;
     icon.innerHTML = 'person_add';
 
+    this.loginFailStatusMessage = false;
+    this.userAlreadyExists = false;
+
     this.flag = true;
   }
 
@@ -92,7 +96,7 @@ export class SignInComponent implements OnInit {
     let element = document.getElementById('clickable-elements') as HTMLElement;
     element.style.marginBottom = '5%';
     this.loading = true;
-    
+    this.samePassword = true;
     setTimeout(() => {
       this.loading = false;
       element.style.marginBottom = '17%';
@@ -160,13 +164,22 @@ export class SignInComponent implements OnInit {
       email?.markAsTouched();
       password?.markAsTouched();
       password2?.markAsTouched();
+    }
+
+    if (password?.value != password2?.value) {
+      this.samePassword = false;
+      return;
     } else {
       this.authService.register({email: email?.value, password: password?.value}).subscribe(
         value => {
           console.log(value);
+          window.location.href = 'http://localhost:4200/sign-in';
         },
-        error => {
-          console.log(error);
+        e => {
+          console.log(e);
+          if (e.error[0] == 'User with email: ' + this.loginForm.get('email')?.value + ' already exists') {
+            this.userAlreadyExists = true;
+          }
         }
       )
     }

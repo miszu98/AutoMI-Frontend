@@ -16,7 +16,7 @@ a {
 
 .container {
     margin-left: 20%;
-    /* margin-right: 20%; */
+    margin-right: 20%;
     margin-right: 2%;
 }
 
@@ -54,12 +54,19 @@ a {
     border: 1px solid rgb(211, 211, 211);
     margin-bottom: 1%;
     border-radius: 10px;
-    width: 100%;
+    /* width: 99%; */
+    /* width: 74%; */
+    width: 99%;
     height: auto;
+    cursor: pointer;
 }
 
 #offer-image {
     padding: 1%;
+}
+
+#offer-title {
+    font-size: 140%;
 }
 
 .informations {
@@ -68,13 +75,17 @@ a {
     display: block;
 }
 
-#offer-description {
+/* #offer-description {
     font-size: 120%;
     margin-bottom: 100%;
+} */
+#offer-description {
+    font-size: 110%;
+    /* margin-right: 150%; */
 }
 
 .mat-chip {
-    margin-top: 2% !important;
+    margin-top: 4% !important;
     background-color: #ff5200;
     color: white;
     user-select: none;
@@ -89,12 +100,10 @@ a {
 }
 
 .price {
-    height: 0%;
     margin-top: 1%;
     color: #ff5200;
     display: flex;
-    margin-left: 30%;
-    margin-right: 2%;
+    /* margin-left: 15%; */
 }
 
 .localization {
@@ -153,9 +162,16 @@ a {
 }
 
 .sidenav {
+    /* color: #ff5200;
+    font-size: 160%; */
+    width: 190px;
+    /* padding-left: 55px;
+    padding-top: 1%; */
+}
+
+.menu {
     color: #ff5200;
     font-size: 160%;
-    width: 190px;
     padding-left: 55px;
     padding-top: 1%;
 }
@@ -167,10 +183,11 @@ a {
 
 #paginator {
     margin-bottom: 23%;
+    /* margin-right: 25%; */
 }
 
 .newest-offers {
-    border: #ff5200 1px solid;
+    /* border: #ff5200 1px solid; */
     border-radius: 5px;
     width: 30%;
     margin-left: 2%;
@@ -178,6 +195,12 @@ a {
     margin-bottom: 5%;
 }
 
+.block-name {
+    margin-top: 15px;
+    text-align: center;
+    color: #ff5200;
+    font-weight: bold;
+}
 
 .content {
     display: flex;
@@ -185,4 +208,28 @@ a {
 
 .new-offer {
     padding: 5%;
+
+}
+
+#btn-log {
+    /* width: 61%; */
+    width: 94%;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 15px;
+}
+
+#btn-logout {
+    width: 94%;
+    margin-left: 5px;
+
+    margin-top: 15px;
+}
+
+a:focus {
+    opacity: 0;
+}
+
+.new-offer {
+    cursor: pointer;
 }

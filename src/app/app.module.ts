@@ -29,6 +29,10 @@ import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { OfferDetailsComponent } from './Components/OfferDetails/offer-details/offer-details.component';
+import { MatCarouselModule } from '@ngmodule/material-carousel';
+import { CurrencyPipe } from '@angular/common';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+
 
 @NgModule({
   declarations: [
@@ -62,9 +66,11 @@ import { OfferDetailsComponent } from './Components/OfferDetails/offer-details/o
     MatTabsModule,
     MatCardModule,
     MatExpansionModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatCarouselModule,
+    MatAutocompleteModule
   ],
-  providers: [],
+  providers: [CarOfferPipe, CurrencyPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
