@@ -2,23 +2,31 @@
     <button id="toggle" (click)="drawer.toggle()" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
     <mat-icon>menu</mat-icon>
     </button>
-    <span id="title"><b>{{ title }}</b></span>
+    <a [routerLink]="['/main']"><span [routerLink]="['/main']" id="title"><b>{{ title }}</b></span></a>
     <span class="example-spacer"></span>
-    <a *ngIf="getLoggedIn() == 'false'" [routerLink]="['/sign-in']" routerLinkActive="router-link-active" ><span>SIGN IN</span></a>
-    <a *ngIf="getLoggedIn() == 'true'" (click)="logout()" [routerLink]="['/sign-in']" routerLinkActive="router-link-active" ><span>LOG OUT</span></a>
+    <!-- <a *ngIf="getLoggedIn() == 'false'" [routerLink]="['/sign-in']" routerLinkActive="router-link-active" ><span>SIGN IN</span></a> -->
+    <!-- <a *ngIf="getLoggedIn() == 'true'" (click)="logout()" [routerLink]="['/sign-in']" routerLinkActive="router-link-active" ><span>LOG OUT</span></a> -->
     <a href="#"><span>FAQ</span></a>
 </mat-toolbar>
 
 <mat-drawer-container class="drawer-container" [hasBackdrop]="false" autosize>
 
 <mat-drawer id="drawer" #drawer class="sidenav" mode="over">
-    <div *ngIf="getLoggedIn() == 'true'">
+    <div class="menu" *ngIf="getLoggedIn() == 'true'">
         <div class="menu-option">
             <a [routerLink]="['/my-offers']" routerLinkActive="router-link-active" ><p>My offers</p></a>
         </div>
         <div class="menu-option">
             <a href="#"><p>Settings</p></a>
         </div>
+    </div>
+    <div *ngIf="getLoggedIn() == 'false'">
+        <button id="btn-log" [routerLink]="['/sign-in']" mat-button>Sign in</button>
+        <p style="font-size: 15px; margin-top: 10px; margin-left: 5px; color: #ff5200;">Here you can log in</p>
+    </div>
+    <div *ngIf="getLoggedIn() == 'true'">
+        <button id="btn-logout" (click)="logout()" [routerLink]="['/sign-in']" mat-button>Log out</button>
+        <p style="font-size: 15px;margin-top: 10px; margin-left: 5px; color: #ff5200;">Here you can log out</p>
     </div>
 </mat-drawer>
 
@@ -74,20 +82,46 @@
             </mat-select>
         </mat-form-field>
         <mat-form-field appearance="fill">
-            <mat-label>Power</mat-label>
-            <mat-select>
+            <mat-label>Power from</mat-label>
+            <mat-select (valueChange)="updateFilterTextValues('startPower', $event)">
+                <mat-option *ngFor="let power of powerRange" [value]="power">
+                    {{ power }}
+                </mat-option>
             </mat-select>
         </mat-form-field>
         <mat-form-field appearance="fill">
-            <mat-label>Engine Capacity</mat-label>
-            <mat-select>
+            <mat-label>Power to</mat-label>
+            <mat-select (valueChange)="updateFilterTextValues('endPower', $event)">
+                <mat-option *ngFor="let power of powerRange" [value]="power">
+                    {{ power }}
+                </mat-option>
             </mat-select>
         </mat-form-field>
         <mat-form-field appearance="fill">
+            <mat-label>Engine Capacity from</mat-label>
+            <mat-select (valueChange)="updateFilterTextValues('ecStart', $event)">
+                <mat-option *ngFor="let ec of engineCapacity" [value]="ec">
+                    {{ ec }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Engine Capacity to</mat-label>
+            <mat-select (valueChange)="updateFilterTextValues('ecEnd', $event)">
+                <mat-option *ngFor="let ec of engineCapacity" [value]="ec">
+                    {{ ec }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <!-- <mat-form-field appearance="fill">
             <mat-label>City</mat-label>
-            <mat-select>
-            </mat-select>
-        </mat-form-field>
+            <input type="text" (keyup)="updateFilter('city', $event)" matInput [matAutocomplete]="auto">
+            <mat-autocomplete (optionSelected)="updateFilter('city', $event)" #auto="matAutocomplete">
+                <mat-option *ngFor="let city of cities" [value]="city.name">
+                    {{city.name}}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field> -->
         <mat-form-field appearance="fill">
             <mat-label>State</mat-label>
             <mat-select (valueChange)="updateFilter('state', $event)">
@@ -96,7 +130,6 @@
                 </mat-option>
             </mat-select>
         </mat-form-field>
-        <button id="btn-filter" mat-button>FILTR</button>
         <button id="btn-filter" mat-button (click)="clearFilters()">CLEAR</button>
     </div>
  </div>
@@ -104,28 +137,50 @@
 <div class="container">
     <div class="content">
         <div class="offers">
-            <div class="offer" *ngFor="let offer of offers">
-                <img id="offer-image" width="30%" height="30%" src="assets/images/maxresdefault.jpg" alt="Here will be image of car">
+            <!-- <div class="offer" *ngFor="let offer of offers">
+                <img id="offer-image" width="30%" height="30%" src="assets/images/maxresdefault.jpg" alt="Here will be image of car"> 
+                <img id="offer-image" width="30%" height="30%" src="{{offer.images[0].url}}" alt="Here will be image of car">
                 <div class="informations">
                     <h1 id="offer-title">{{ offer.title }}</h1>
                     <span id="offer-description">{{ offer.description }}</span>
                     <mat-chip-list>
                         <mat-chip>{{ offer.car.fuelType.fuelTypeName }}</mat-chip>
-                        <mat-chip>{{ offer.car.yearOfProduction }} km</mat-chip>
+                        <mat-chip>{{ offer.car.yearOfProduction }}</mat-chip>
                         <mat-chip>{{ offer.car.engineCapacity}} cm3</mat-chip>
                     </mat-chip-list>
                     <div class="localization">
                         <mat-icon>location_on</mat-icon>
-                        <p>Piekary Śląskie</p>
+                        <p>{{offer.city}}</p>
                     </div>
                 </div>
                 <div class="price">
                     <h1>{{ offer.price }}</h1>
                     <span><b>PLN</b></span>
                 </div>
+            </div> -->
+            <div class="offer" (click)="loadOfferDetails(offer.id)" *ngFor="let offer of offers">
+                    <!-- <img id="offer-image" width="30%" height="30%" src="assets/images/maxresdefault.jpg" alt="Here will be image of car"> -->
+                    <img id="offer-image" width="30%" height="30%" src="{{offer.images[0].url}}" alt="Here will be image of car">
+                    <div class="informations">
+                        <!-- <h1 id="offer-title">{{ offer.title }}</h1> -->
+                        <p id="offer-title">{{ offer.title }}</p>
+                        <span id="offer-description">{{ modifyOfferDescription(offer.description) }}</span>
+                        <mat-chip-list>
+                            <mat-chip>{{ offer.car.fuelType.fuelTypeName }}</mat-chip>
+                            <mat-chip>{{ offer.car.yearOfProduction }}</mat-chip>
+                            <mat-chip>{{ offer.car.engineCapacity}} cm3</mat-chip>
+                        </mat-chip-list>
+                        <div class="localization">
+                            <mat-icon>location_on</mat-icon>
+                            <p>{{offer.city}}</p>
+                        </div>
+                    </div>
+                    <div class="price">
+                        <h1>{{ modifyPrice(offer.price) }}</h1>
+                    </div>
             </div>
     
-            <div class="offer">
+            <!-- <div class="offer">
                 <img id="offer-image" width="30%" height="30%" src="assets/images/maxresdefault.jpg" alt="Here will be image of car">
                 <div class="informations">
                     <h1 id="offer-title">Title</h1>
@@ -151,29 +206,29 @@
                     <span><b>PLN</b></span>
                 </div>
                 
-            </div>
+            </div> -->
             <!-- <mat-paginator id="paginator" [length]="50"
                 [pageSize]="10"
                 [pageSizeOptions]="[5, 1, 2, 20, 25]"
                 aria-label="Select page"
                 (page)="loadOffers($event)">
             </mat-paginator>   -->
-            <mat-paginator id="paginator" [length]="50"
+            <mat-paginator id="paginator" [length]="offersCount"
                 [pageSize]="10"
                 [pageSizeOptions]="[1, 2, 5, 10, 20, 25]"
                 aria-label="Select page"
                 (page)="loadPaginationData($event)">
             </mat-paginator>  
          </div>
-         <div class="newest-offers">
-            <div class="new-offer">
-                <img src="assets/images/maxresdefault.jpg" alt="Here should be image">
-                <p style="font-size: 150%">Title</p>
-                <div style="display:flex">
-                    <span style="font-size: 150%; margin-top: 2%;">56000 PLN</span>
-                    <button style="margin-left: 5%; height: 33px;" mat-button>MORE</button>
-                </div>
-                
+
+         <div [class.mat-elevation-z8]="true" class="newest-offers">
+             <div class="block-name">
+                <h1>Offers of the day</h1>
+             </div>
+            <div class="new-offer" (click)="loadOfferDetails(newOffer.id)" *ngFor="let newOffer of newestOffers">
+                <img [src]="newOffer.images[0].url" alt="Here should be image">
+                <p style="font-size: 150%">{{ newOffer.title }}</p>
+                <span style="font-size: 150%; margin-top: 2%;">{{ modifyPrice(newOffer.price) }}</span>
             </div>
          </div>
 

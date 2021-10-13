@@ -1,22 +1,33 @@
 <mat-toolbar color="primary">
-    <button id="toggle" (click)="drawer.toggle()" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-    <mat-icon>menu</mat-icon>
-    </button>
-    <span id="title"><b>{{ title }}</b></span>
-    <span class="example-spacer"></span>
-    <a [routerLink]="['/sign-in']" routerLinkActive="router-link-active" ><span>SIGN IN</span></a>
-    <a href="#"><span>FAQ</span></a>
+  <button id="toggle" (click)="drawer.toggle()" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+  <mat-icon>menu</mat-icon>
+  </button>
+  <a [routerLink]="['/main']"><span [routerLink]="['/main']" id="title"><b>{{ title }}</b></span></a>
+  <span class="example-spacer"></span>
+  <!-- <a *ngIf="getLoggedIn() == 'false'" [routerLink]="['/sign-in']" routerLinkActive="router-link-active" ><span>SIGN IN</span></a> -->
+  <!-- <a *ngIf="getLoggedIn() == 'true'" (click)="logout()" [routerLink]="['/sign-in']" routerLinkActive="router-link-active" ><span>LOG OUT</span></a> -->
+  <a href="#"><span>FAQ</span></a>
 </mat-toolbar>
 
 <mat-drawer-container class="drawer-container" [hasBackdrop]="false" autosize>
 
-<mat-drawer #drawer class="sidenav" mode="over">
-        <div class="menu-option">
-            <a [routerLink]="['/my-offers']" routerLinkActive="router-link-active" ><p>My offers</p></a>
-        </div>
-        <div class="menu-option">
-            <a href="#"><p>Settings</p></a>
-        </div>
+<mat-drawer id="drawer" #drawer class="sidenav" mode="over">
+  <div class="menu" *ngIf="getLoggedIn() == 'true'">
+      <div class="menu-option">
+          <a [routerLink]="['/my-offers']" routerLinkActive="router-link-active" ><p>My offers</p></a>
+      </div>
+      <div class="menu-option">
+          <a href="#"><p>Settings</p></a>
+      </div>
+  </div>
+  <div *ngIf="getLoggedIn() == 'false'">
+      <button id="btn-log" [routerLink]="['/sign-in']" mat-button>Sign in</button>
+      <p style="font-size: 15px; margin-top: 10px; margin-left: 5px; color: #ff5200;">Here you can log in</p>
+  </div>
+  <div *ngIf="getLoggedIn() == 'true'">
+      <button id="btn-logout" (click)="logout()" [routerLink]="['/sign-in']" mat-button>Log out</button>
+      <p style="font-size: 15px;margin-top: 10px; margin-left: 5px; color: #ff5200;">Here you can log out</p>
+  </div>
 </mat-drawer>
  
 
@@ -160,9 +171,9 @@
                         <textarea matInput
                                   cdkTextareaAutosize
                                   cdkAutosizeMinRows="19"
-                                  cdkAutosizeMaxRows="19" formControlName="description" maxlength="512" required></textarea>
+                                  cdkAutosizeMaxRows="19" formControlName="description" maxlength="5000" required></textarea>
                         <mat-error *ngIf="offerForm.get('description')?.invalid">{{ getCarDetailError('description') }}</mat-error>
-                        <mat-hint align="end">{{offerForm.get('description')?.value?.length || 0}}/512</mat-hint>
+                        <mat-hint align="end">{{offerForm.get('description')?.value?.length || 0}}/5000</mat-hint>
                       </mat-form-field>
                     </div>
                     <div class="offer-images">
@@ -366,9 +377,9 @@
                     <textarea matInput
                               cdkTextareaAutosize
                               cdkAutosizeMinRows="19"
-                              cdkAutosizeMaxRows="19" formControlName="description" maxlength="512" required></textarea>
+                              cdkAutosizeMaxRows="19" formControlName="description" maxlength="5000" required></textarea>
                     <mat-error *ngIf="offerForm.get('description')?.invalid">{{ getCarDetailError('description') }}</mat-error>
-                    <mat-hint align="end">{{offerForm.get('description')?.value?.length || 0}}/512</mat-hint>
+                    <mat-hint align="end">{{offerForm.get('description')?.value?.length || 0}}/5000</mat-hint>
                   </mat-form-field>
                 </div>
                 <div class="offer-images">

@@ -1,0 +1,120 @@
+<mat-toolbar color="primary">
+    <button id="toggle" (click)="drawer.toggle()" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+    <mat-icon>menu</mat-icon>
+    </button>
+    <span id="title"><b>{{ title }}</b></span>
+    <span class="example-spacer"></span>
+    <a *ngIf="getLoggedIn() == 'false'" [routerLink]="['/sign-in']" routerLinkActive="router-link-active" ><span>SIGN IN</span></a>
+    <a *ngIf="getLoggedIn() == 'true'" (click)="logout()" [routerLink]="['/sign-in']" routerLinkActive="router-link-active" ><span>LOG OUT</span></a>
+    <a href="#"><span>FAQ</span></a>
+</mat-toolbar>
+
+<mat-drawer-container class="drawer-container" [hasBackdrop]="false" autosize>
+
+<mat-drawer id="drawer" #drawer class="sidenav" mode="over">
+    <div *ngIf="getLoggedIn() == 'true'">
+        <div class="menu-option">
+            <a [routerLink]="['/my-offers']" routerLinkActive="router-link-active" ><p>My offers</p></a>
+        </div>
+        <div class="menu-option">
+            <a href="#"><p>Settings</p></a>
+        </div>
+    </div>
+</mat-drawer>
+
+<div class="container">
+  <div style="display: flex;">
+    <div class="slider">
+      <mat-carousel
+      timings="250ms ease-in"
+      [autoplay]="true"
+      [interval]="5000"
+      color="accent"
+      [proportion]="60"
+      [slides]="slides.length"
+      [loop]="true"
+      [hideArrows]="false"
+      [hideIndicators]="false"
+      [useKeyboard]="true"
+      [useMouseWheel]="false"
+      orientation="ltr">
+      <mat-carousel-slide
+        #matCarouselSlide
+        *ngFor="let slide of slides; let i = index"
+        [image]="slide.image"
+        overlayColor="#00000040"
+        [hideOverlay]="false"
+      ></mat-carousel-slide>
+    </mat-carousel>
+    </div>
+    <div [class.mat-elevation-z8]="true" class="offer-title">
+        <h1>{{ carOffer.title }}</h1>
+        <hr>
+        <div class="basic-details">
+          <mat-chip-list>
+            <mat-chip>{{carOffer.car.mark.mark}}</mat-chip>
+            <mat-chip>{{carOffer.car.model.model}}</mat-chip>
+            <mat-chip>{{carOffer.car.mileage}} km</mat-chip>
+          </mat-chip-list>
+        </div>
+        <hr>
+        <div class="price">
+          <h1>{{carOffer.price}}</h1>
+          <span style="font-weight: bold;">PLN</span>
+        </div>
+        <h2>Contact with seller: </h2>
+        <p>513739350</p>
+    </div>
+  </div>
+  <div [class.mat-elevation-z8]="true" class="details">
+    <h1>Details</h1>
+    <div class="row">
+      <div class="column">
+        <span id="label">Mark: </span><span>{{carOffer.car.mark.mark}}</span>
+        <br>
+        <br>
+        <span id="label">Fuel type: </span><span>{{carOffer.car.fuelType.fuelTypeName}}</span>
+        <br>
+        <br>
+        <span id="label">Power: </span><span>{{carOffer.car.power}} HP</span>
+        <br>
+        <br>
+        <span id="label">Gearbox: </span><span>{{carOffer.car.gearbox.gearbox}}</span>
+        <br>
+        <br>
+        <span id="label">State: </span><span>{{carOffer.car.state}}</span>
+        <br>
+        <br>
+        <span id="label">Color: </span><span>{{carOffer.car.color.colorName}}</span>
+      </div>
+      <div class="column">
+        <span id="label">Model: </span><span>{{carOffer.car.model.model}}</span>
+        <br>
+        <br>
+        <span id="label">Car type: </span><span>{{carOffer.car.carType}}</span>
+        <br>
+        <br>
+        <span id="label">Engine capacity: </span><span>{{carOffer.car.engineCapacity}}&nbsp;cm&#179;</span>
+        <br>
+        <br>
+        <span id="label">Driving gear: </span><span>{{carOffer.car.drivingGear.drivingGear}}</span>
+        <br>
+        <br>
+        <span id="label">Mileage: </span><span>{{carOffer.car.mileage}} km</span>
+        <br>
+        <br>
+        <span id="label">Year of production: </span><span>{{carOffer.car.yearOfProduction}}</span>
+      </div>
+    </div>
+    <div class="row">
+      <hr>
+      <h1 style="margin-top: 2%;">Description</h1>
+      <pre>{{ carOffer.description }}</pre>
+    </div>
+  </div>
+   
+</div>
+
+
+
+</mat-drawer-container>
