@@ -7,7 +7,12 @@ import { ShareDataService } from 'src/app/Services/ShareData/share-data.service'
 import { TokenStorageService } from 'src/app/Services/TokenStorage/token-storage.service';
 import { InformationsComponent } from '../Dialogs/informations/informations.component';
 
-const PASSWORD_PATTERN = '(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z])(?=.*[!?.,;!@#$%^&*])[a-zA-Z0-9!?.,;!@#$%^&*]{8,30}';
+const PASSWORD_PATTERN = '(?=.*[a-z])' + 
+                        '(?=.*[0-9])' + 
+                        '(?=.*[A-Z])' + 
+                        '(?=.*[!?.,;@#$%^&*])' + 
+                        '[a-zA-Z0-9!?.,;@#$%^&*]' + 
+                        '{8,30}';
 
 @Component({
   selector: 'app-sign-in',

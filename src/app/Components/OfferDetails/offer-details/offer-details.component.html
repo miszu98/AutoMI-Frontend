@@ -1,24 +1,32 @@
 <mat-toolbar color="primary">
-    <button id="toggle" (click)="drawer.toggle()" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-    <mat-icon>menu</mat-icon>
-    </button>
-    <span id="title"><b>{{ title }}</b></span>
-    <span class="example-spacer"></span>
-    <a *ngIf="getLoggedIn() == 'false'" [routerLink]="['/sign-in']" routerLinkActive="router-link-active" ><span>SIGN IN</span></a>
-    <a *ngIf="getLoggedIn() == 'true'" (click)="logout()" [routerLink]="['/sign-in']" routerLinkActive="router-link-active" ><span>LOG OUT</span></a>
-    <a href="#"><span>FAQ</span></a>
+  <button id="toggle" (click)="drawer.toggle()" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+  <mat-icon>menu</mat-icon>
+  </button>
+  <a [routerLink]="['/main']"><span [routerLink]="['/main']" id="title"><b>{{ title }}</b></span></a>
+  <span class="example-spacer"></span>
+  <!-- <a *ngIf="getLoggedIn() == 'false'" [routerLink]="['/sign-in']" routerLinkActive="router-link-active" ><span>SIGN IN</span></a> -->
+  <!-- <a *ngIf="getLoggedIn() == 'true'" (click)="logout()" [routerLink]="['/sign-in']" routerLinkActive="router-link-active" ><span>LOG OUT</span></a> -->
+  <a href="#"><span>FAQ</span></a>
 </mat-toolbar>
 
 <mat-drawer-container class="drawer-container" [hasBackdrop]="false" autosize>
 
-<mat-drawer id="drawer" #drawer class="sidenav" mode="over">
-    <div *ngIf="getLoggedIn() == 'true'">
+  <mat-drawer id="drawer" #drawer class="sidenav" mode="over">
+    <div class="menu" *ngIf="getLoggedIn() == 'true'">
         <div class="menu-option">
             <a [routerLink]="['/my-offers']" routerLinkActive="router-link-active" ><p>My offers</p></a>
         </div>
         <div class="menu-option">
             <a href="#"><p>Settings</p></a>
         </div>
+    </div>
+    <div *ngIf="getLoggedIn() == 'false'">
+        <button id="btn-log" [routerLink]="['/sign-in']" mat-button>Sign in</button>
+        <p style="font-size: 15px; margin-top: 10px; margin-left: 5px; color: #ff5200;">Here you can log in</p>
+    </div>
+    <div *ngIf="getLoggedIn() == 'true'">
+        <button id="btn-logout" (click)="logout()" [routerLink]="['/sign-in']" mat-button>Log out</button>
+        <p style="font-size: 15px;margin-top: 10px; margin-left: 5px; color: #ff5200;">Here you can log out</p>
     </div>
 </mat-drawer>
 
@@ -59,11 +67,11 @@
         </div>
         <hr>
         <div class="price">
-          <h1>{{carOffer.price}}</h1>
-          <span style="font-weight: bold;">PLN</span>
+          <h1>{{ modifyPrice(carOffer.price) }}</h1>
         </div>
         <h2>Contact with seller: </h2>
-        <p>513739350</p>
+        <p><span id="contact-info">Phone number: </span>{{ carOffer.phoneNumber }}</p>
+        <p><span id="contact-info">Email: </span> {{ carOffer.email }}</p>
     </div>
   </div>
   <div [class.mat-elevation-z8]="true" class="details">

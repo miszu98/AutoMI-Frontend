@@ -30,7 +30,6 @@
     </div>
 </mat-drawer>
 
-
 <div class="filter">
     <div class="form">
         <mat-form-field appearance="fill">
@@ -163,7 +162,11 @@
                     <img id="offer-image" width="30%" height="30%" src="{{offer.images[0].url}}" alt="Here will be image of car">
                     <div class="informations">
                         <!-- <h1 id="offer-title">{{ offer.title }}</h1> -->
-                        <p id="offer-title">{{ offer.title }}</p>
+                        <div >
+                            <span id="offer-title">{{ offer.title }}</span>
+                            <h1 style="float: right; margin-right: 5%">{{ modifyPrice(offer.price) }}</h1>
+                        </div>
+                        <br>
                         <span id="offer-description">{{ modifyOfferDescription(offer.description) }}</span>
                         <mat-chip-list>
                             <mat-chip>{{ offer.car.fuelType.fuelTypeName }}</mat-chip>
@@ -171,13 +174,13 @@
                             <mat-chip>{{ offer.car.engineCapacity}} cm3</mat-chip>
                         </mat-chip-list>
                         <div class="localization">
-                            <mat-icon>location_on</mat-icon>
+                            <mat-icon style="margin-top: 8px;">location_on</mat-icon>
                             <p>{{offer.city}}</p>
                         </div>
                     </div>
-                    <div class="price">
+                    <!-- <div class="price" style="float: right;">
                         <h1>{{ modifyPrice(offer.price) }}</h1>
-                    </div>
+                    </div> -->
             </div>
     
             <!-- <div class="offer">
@@ -214,7 +217,7 @@
                 (page)="loadOffers($event)">
             </mat-paginator>   -->
             <mat-paginator id="paginator" [length]="offersCount"
-                [pageSize]="10"
+                [pageSize]="size"
                 [pageSizeOptions]="[1, 2, 5, 10, 20, 25]"
                 aria-label="Select page"
                 (page)="loadPaginationData($event)">
