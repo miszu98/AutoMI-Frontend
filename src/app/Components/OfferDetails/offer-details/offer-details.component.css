@@ -6,15 +6,42 @@ a {
 
 .drawer-container {
     background-color: white;
-    
+    height: 100%;
+    padding-bottom: 80px;
 }
 
 .sidenav {
+    /* color: #ff5200;
+    font-size: 160%; */
+    width: 190px;
+    /* padding-left: 55px;
+    padding-top: 1%; */
+}
+.menu {
     color: #ff5200;
     font-size: 160%;
-    width: 190px;
     padding-left: 55px;
     padding-top: 1%;
+}
+
+#btn-log {
+    /* width: 61%; */
+    width: 94%;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 15px;
+}
+
+#btn-logout {
+    width: 94%;
+    margin-left: 5px;
+
+    margin-top: 15px;
+}
+
+.mat-button {
+    background-color: #ff5200;
+    color: white;
 }
 
 .mat-toolbar {
@@ -104,4 +131,18 @@ a {
 
 .row {
     margin-top: 3%;
+}
+
+
+#contact-info {
+    font-weight: bold;
+    font-size: 15px;
+}
+
+pre {
+    white-space: pre-wrap;
+}
+
+::ng-deep .mat-icon-button.mat-accent {
+    color: #ff5200;
 }

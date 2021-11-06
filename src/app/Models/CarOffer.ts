@@ -54,6 +54,8 @@ export interface CarOffer {
     city: string;
     images: Array<Image>;
     createdAt: string;
+    email: string;
+    phoneNumber: string;
 }
 
 

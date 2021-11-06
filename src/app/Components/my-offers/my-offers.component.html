@@ -32,7 +32,7 @@
  
 
 <div class="container">
-    <mat-tab-group [(selectedIndex)]="selectedTabIndex" (selectedTabChange)="cleanForm()">
+    <mat-tab-group [(selectedIndex)]="selectedTabIndex" (selectedTabChange)="cleanForm()" dynamicHeight>
         <mat-tab label="My offers">
             <div class="my-offers">
               <button mat-button (click)="accordion.closeAll()" id="close">close all</button>
@@ -236,16 +236,35 @@
                       <!-- <button mat-button>Clear</button> -->
                     </div>
                   </div>
-                  <div style="margin-top: 2%;">
-                    <mat-form-field style="width: 73%; margin-right: 2%;" floatLabel="always" appearance="fill">
-                      <mat-label>Price</mat-label>
-                      <input class="price-input"  min="0" matInput type="number" placeholder="0" formControlName="price" required>
-                      <span matPrefix>$&nbsp;</span>
-                      <span matSuffix>.00</span>
-                      <mat-error *ngIf="offerForm.get('price')?.invalid">{{ getCarDetailError('price') }}</mat-error>
+                  <div style="display: flex;">
+                    <div class="contact">
+                      <h1>Contact</h1>
+                      <mat-form-field appearance="fill">
+                        <mat-label>Phone number</mat-label>
+                        <input matInput type="number" formControlName="phoneNumber" required>
+                        <mat-error *ngIf="offerForm.get('phoneNumber')?.invalid">{{ getPhoneNumberErrorMessage() }}</mat-error>
                     </mat-form-field>
-                    <button id="updateBtn" (click)="updateOffer(offer)" mat-button>UPDATE</button>
+                    <mat-form-field  appearance="fill">
+                      <mat-label>Email</mat-label>
+                      <input matInput type="email" formControlName="email" required>
+                      <mat-error *ngIf="offerForm.get('email')?.invalid">{{ getEmailErrorMessage() }}</mat-error>
+                  </mat-form-field>
                   </div>
+                  <div style="display: block; margin-left: 2%; margin-top: 2%;">
+                    <div>
+                      <mat-form-field style="width: auto; margin-right: 2%;" floatLabel="always" appearance="fill">
+                        <mat-label>Price</mat-label>
+                        <input class="price-input"  min="0" matInput type="number" placeholder="0" formControlName="price" required>
+                        <span matPrefix>$&nbsp;</span>
+                        <span matSuffix>.00</span>
+                        <mat-error *ngIf="offerForm.get('price')?.invalid">{{ getCarDetailError('price') }}</mat-error>
+                      </mat-form-field>
+                    </div>
+                    <mat-spinner *ngIf="loading"></mat-spinner>
+                  </div>
+                  <button id="on-submit-btn" (click)="updateOffer(offer)" mat-button>UPDATE</button>
+                  </div>
+
                   </form>
                 </mat-expansion-panel>
               </mat-accordion>
@@ -412,16 +431,37 @@
                   <!-- <button mat-button>Clear</button> -->
                 </div>
               </div>
-              <div style="margin-top: 2%;">
-                <mat-form-field style="width: 73%; margin-right: 2%;" floatLabel="always" appearance="fill">
-                  <mat-label>Price</mat-label>
-                  <input class="price-input"  min="0" matInput type="number" placeholder="0" formControlName="price" required>
-                  <span matPrefix>$&nbsp;</span>
-                  <span matSuffix>.00</span>
-                  <mat-error *ngIf="offerForm.get('price')?.invalid">{{ getCarDetailError('price') }}</mat-error>
+              <div style="display: flex;">
+                <div class="contact">
+                  <h1>Contact</h1>
+                  <mat-form-field appearance="fill">
+                    <mat-label>Phone number</mat-label>
+                    <input matInput type="number" formControlName="phoneNumber" required>
+                    <mat-error *ngIf="offerForm.get('phoneNumber')?.invalid">{{ getPhoneNumberErrorMessage() }}</mat-error>
                 </mat-form-field>
-                <button (click)="onSubmit()" mat-button>CREATE</button>
+                <mat-form-field  appearance="fill">
+                  <mat-label>Email</mat-label>
+                  <input matInput type="email" formControlName="email" required>
+                  <mat-error *ngIf="offerForm.get('email')?.invalid">{{ getEmailErrorMessage() }}</mat-error>
+              </mat-form-field>
               </div>
+              <div style="display: block; margin-left: 2%; margin-top: 2%;">
+                <div>
+                  <mat-form-field style="width: auto; margin-right: 2%;" floatLabel="always" appearance="fill">
+                    <mat-label>Price</mat-label>
+                    <input class="price-input"  min="0" matInput type="number" placeholder="0" formControlName="price" required>
+                    <span matPrefix>$&nbsp;</span>
+                    <span matSuffix>.00</span>
+                    <mat-error *ngIf="offerForm.get('price')?.invalid">{{ getCarDetailError('price') }}</mat-error>
+                  </mat-form-field>
+                </div>
+                <mat-spinner *ngIf="loading"></mat-spinner>
+              </div>
+              <button id="on-submit-btn" (click)="onSubmit()" mat-button>CREATE</button>
+              </div>
+              
+              
+             
               </form>
             </div>
         </mat-tab>

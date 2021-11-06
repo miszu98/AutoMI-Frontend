@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatAccordion } from '@angular/material/expansion';
+import { of } from 'rxjs';
 import { CarOffer, Color, DrivingGear, FuelType, Gearbox } from 'src/app/Models/CarOffer';
 import { CarType } from 'src/app/Models/CarType';
 import { Image } from 'src/app/Models/Image';
@@ -27,7 +28,7 @@ import { TokenStorageService } from 'src/app/Services/TokenStorage/token-storage
 export class MyOffersComponent implements OnInit {
   
   title = "AutoMI";
-
+  loading = false;
   panelOpenState = false;
 
   // disabled = true;
@@ -96,7 +97,9 @@ export class MyOffersComponent implements OnInit {
     gearbox: new FormControl('', Validators.required),
     drivingGear: new FormControl('', Validators.required),
     state: new FormControl('', Validators.required),
-    color: new FormControl('', Validators.required)
+    color: new FormControl('', Validators.required),
+    phoneNumber: new FormControl('', [Validators.required, Validators.minLength(9), Validators.maxLength(9), Validators.pattern('^[0-9]{9}$')]),
+    email: new FormControl('', [Validators.required, Validators.email])
   })
 
   constructor(
@@ -165,6 +168,7 @@ export class MyOffersComponent implements OnInit {
     this.carOfferService.delete(id).subscribe(
       value => {
         console.log("Offer with id: " + id + " deleted");
+        window.location.reload();
       }, 
       error => {
         console.log(error);
@@ -213,6 +217,8 @@ export class MyOffersComponent implements OnInit {
       this.offerForm.get('state')?.setValue(offer.car.state);
       this.offerForm.get('typeOfVehicle')?.setValue(offer.car.carType);
       this.offerForm.get('color')?.setValue(offer.car.color.id);
+      this.offerForm.get('phoneNumber')?.setValue(offer.phoneNumber);
+      this.offerForm.get('email')?.setValue(offer.email)
 
       this.loadCorrectModelsById(offer.car.mark.id);
     }, 150)
@@ -262,6 +268,28 @@ export class MyOffersComponent implements OnInit {
     return '';
   }
 
+  public getPhoneNumberErrorMessage() {
+    let field = this.offerForm.get('phoneNumber');
+    if (field?.hasError('required')) {
+      return 'You must enter value';
+    }  
+    if (!field?.errors?.minLength) {
+      return 'Phone number length must be 9';
+    } 
+    return '';
+  }
+
+  public getEmailErrorMessage() {
+    let field = this.offerForm.get('email');
+    if (field?.hasError('required')) {
+      return 'You must enter value';
+    } 
+    if (field?.hasError('email')) {
+      return 'Wrong email format';
+    }
+    return '';
+  }
+
   public getCityErrorMessage() {
     let field = this.offerForm.get('city');
     if (field?.hasError('required')) {
@@ -281,6 +309,14 @@ export class MyOffersComponent implements OnInit {
     return '';
   }
 
+  public disableForm() {
+    this.offerForm.disable();
+  }
+
+  public enableForm() {
+    this.offerForm.enable();
+  }
+
   public onSubmit() {
     let form = this.offerForm;
     let userId = this.tokenStorageService.getUser().id;
@@ -292,63 +328,78 @@ export class MyOffersComponent implements OnInit {
     } else {
       this.imgError = false;
     }
-
     if (form.invalid) {
       form.markAsTouched();
     } else {
-      let offer = {
-        title: form.get('title')?.value,
-        description: form.get('description')?.value,
-        price: form.get('price')?.value,
-        car: {
-          power: form.get('power')?.value,
-          engineCapacity: form.get('engineCapacity')?.value,
-          mileage: form.get('mileage')?.value,
-          yearOfProduction: form.get('yearOfProduction')?.value,
-          mark: {
-            id: form.get('mark')?.value.id
-          },
-          model: {
-            id: form.get('model')?.value.id
-          },
-          fuelType: {
-            id: form.get('typeOfFuel')?.value.id
-          },
-          gearbox: {
-            id: form.get('gearbox')?.value.id
-          },
-          drivingGear: {
-            id: form.get('drivingGear')?.value.id
-          },
-          state: form.get('state')?.value.id,
-          carType: form.get('typeOfVehicle')?.value.id,
-          color: {
-            id: form.get('color')?.value.id
-          },
-        },
-        user: {
-          id: userId,
-        }, 
-        city: form.get('city')?.value,
-      };
-  
+      this.disableForm();
+      this.loading = true;
+      let offer = this.createJsonOffer(form, userId);
+      
       this.carOfferService.add(offer).subscribe(
         value => {
           let offerId = value.id;
           this.imageUploaderService.upload(this.images, offerId).subscribe(
             value => {
               console.log(value);
+              this.enableForm();
+              this.reloadPage();
+              this.loading = false;
             },
             error => {
               console.log(error);
+              this.enableForm();
+              this.loading = false;
             }
           )
         },
         error => {
           console.log(error);
+          this.enableForm();
+          this.loading = false;
         }
       );
     }
+  }
+
+  public createJsonOffer(form: FormGroup, userId: number) {
+    let offer = {
+      title: form.get('title')?.value,
+      description: form.get('description')?.value,
+      price: form.get('price')?.value,
+      car: {
+        power: form.get('power')?.value,
+        engineCapacity: form.get('engineCapacity')?.value,
+        mileage: form.get('mileage')?.value,
+        yearOfProduction: form.get('yearOfProduction')?.value,
+        mark: {
+          id: form.get('mark')?.value.id
+        },
+        model: {
+          id: form.get('model')?.value.id
+        },
+        fuelType: {
+          id: form.get('typeOfFuel')?.value.id
+        },
+        gearbox: {
+          id: form.get('gearbox')?.value.id
+        },
+        drivingGear: {
+          id: form.get('drivingGear')?.value.id
+        },
+        state: form.get('state')?.value.id,
+        carType: form.get('typeOfVehicle')?.value.id,
+        color: {
+          id: form.get('color')?.value.id
+        },
+      },
+      user: {
+        id: userId,
+      }, 
+      phoneNumber: form.get('phoneNumber')?.value,
+      email: form.get('email')?.value,
+      city: form.get('city')?.value,
+    };
+    return offer;
   }
 
   public offerToUpdate(carId: number, userId: number) {
@@ -388,6 +439,8 @@ export class MyOffersComponent implements OnInit {
         id: userId,
       }, 
       city: form.get('city')?.value,
+      phoneNumber: form.get('phoneNumber')?.value,
+      email: form.get('email')?.value,
     };
   }
 
@@ -407,6 +460,7 @@ export class MyOffersComponent implements OnInit {
     if (form.invalid) {
       form.markAsTouched();
     } else if (form.valid && !condition) {
+      this.loading = true;
       let offer = this.offerToUpdate(oldOffer.car.id, userId);
 
       this.carOfferService.update(oldOffer.id, offer).subscribe(
@@ -419,10 +473,15 @@ export class MyOffersComponent implements OnInit {
           
           this.uploadImagesByLinks(offerId);
 
-          setTimeout(() => this.reloadPage(), 5000);
+          setTimeout(() => {
+            this.reloadPage();
+            this.loading = false;
+          }, 5000);
+          console.log(this.loading);
         },
         error => {
           console.log(error);
+          this.loading = false;
         }
       );
     }

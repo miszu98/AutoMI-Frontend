@@ -1,3 +1,4 @@
+import { CurrencyPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MatCarousel, MatCarouselComponent } from '@ngmodule/material-carousel';
@@ -27,11 +28,17 @@ export class OfferDetailsComponent implements OnInit {
     private route: ActivatedRoute, 
     private shareDataService: ShareDataService, 
     private tokenStorageService: TokenStorageService,
-    private carOfferService: CarOffersService
+    private carOfferService: CarOffersService,
+    private currencyPipe: CurrencyPipe
     ) { }
 
   ngOnInit(): void {
     this.getById();
+    setTimeout(() => this.trigerMenu(), 150);
+  }
+
+  public modifyPrice(price: number) {
+    return this.currencyPipe.transform(price, '');
   }
 
   public getById() {
@@ -52,6 +59,11 @@ export class OfferDetailsComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  public trigerMenu() {
+    let element = document.getElementById('toggle');
+    element?.click();
   }
 
   public getLoggedIn(): string | null {

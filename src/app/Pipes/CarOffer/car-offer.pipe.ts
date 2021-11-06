@@ -7,7 +7,7 @@ export class CarOfferPipe implements PipeTransform {
 
   transform(value: string): string {
     if (value.length > 35) {
-      return value.substring(1, 35);
+      return value.substring(0, 35) + "...";
     } return value;
   }
 
