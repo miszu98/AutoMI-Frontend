@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/Services/Auth/auth.service';
+import { MailServiceService } from 'src/app/Services/MailService/mail-service.service';
 import { ShareDataService } from 'src/app/Services/ShareData/share-data.service';
 import { TokenStorageService } from 'src/app/Services/TokenStorage/token-storage.service';
 import { InformationsComponent } from '../Dialogs/informations/informations.component';
@@ -38,9 +39,31 @@ export class SignInComponent implements OnInit {
     password2 : new FormControl('', Validators.required)
   });
 
-  constructor(private dialog: MatDialog, private authService: AuthService, private router: Router, private tokenStorage: TokenStorageService, private shareDataService: ShareDataService) { }
+  constructor(private dialog: MatDialog, 
+    private authService: AuthService, 
+    private router: Router, 
+    private tokenStorage: TokenStorageService, 
+    private shareDataService: ShareDataService,
+    private mailService: MailServiceService) { }
 
   ngOnInit(): void {
+  }
+
+  public sendChangePasswordEmail() {
+    if (this.loginForm.get("email")?.invalid) {
+      this.loginForm.get('email')?.markAsTouched();
+    } else {
+      this.mailService.sendChangePasswordEmail(this.loginForm.get('email')?.value).subscribe(
+        value => {
+          console.log(value);
+          window.location.href = "http://localhost:4200/sign-in"
+        },
+        e => {
+          console.log(e);
+        }
+      );
+    }
+
   }
 
   public clearForm() {
@@ -58,6 +81,7 @@ export class SignInComponent implements OnInit {
   }
 
   public loadRegisterForm() {
+    this.clearForm();
     this.forgotPassword = false;
     let element = document.getElementById('clickable-elements') as HTMLElement;
     element.style.marginBottom = '5%';
@@ -97,6 +121,7 @@ export class SignInComponent implements OnInit {
   }
   
   public loadLoginForm() {
+    this.clearForm();
     this.forgotPassword = false;
     let element = document.getElementById('clickable-elements') as HTMLElement;
     element.style.marginBottom = '5%';
@@ -111,6 +136,7 @@ export class SignInComponent implements OnInit {
   }
 
   public loadForgotPassword() {
+    this.clearForm();
     let windowName = document.getElementById('label') as HTMLElement;
     windowName.innerHTML = 'Change Password';
 
@@ -208,8 +234,6 @@ export class SignInComponent implements OnInit {
       return 'You must enter a value';
     } return '';
   }
-
-
 
 
 }
