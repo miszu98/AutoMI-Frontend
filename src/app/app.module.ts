@@ -31,6 +31,7 @@ import { MatCarouselModule } from '@ngmodule/material-carousel';
 import { CurrencyPipe } from '@angular/common';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { ChangePasswordComponent } from './Components/change-password/change-password.component';
+import { authInterceptorProviders } from './Interceptors/Auth/auth.interceptor';
 
 
 @NgModule({
@@ -70,7 +71,7 @@ import { ChangePasswordComponent } from './Components/change-password/change-pas
     MatCarouselModule,
     MatAutocompleteModule
   ],
-  providers: [CarOfferPipe, CurrencyPipe],
+  providers: [CarOfferPipe, CurrencyPipe, authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

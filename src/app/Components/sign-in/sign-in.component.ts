@@ -7,6 +7,8 @@ import { MailServiceService } from 'src/app/Services/MailService/mail-service.se
 import { ShareDataService } from 'src/app/Services/ShareData/share-data.service';
 import { TokenStorageService } from 'src/app/Services/TokenStorage/token-storage.service';
 import { InformationsComponent } from '../Dialogs/informations/informations.component';
+import jwt_decode from "jwt-decode";
+import { Jwt } from 'src/app/Models/Jwt';
 
 const PASSWORD_PATTERN = '(?=.*[a-z])' + 
                         '(?=.*[0-9])' + 
@@ -170,8 +172,9 @@ export class SignInComponent implements OnInit {
       this.authService.login({email: email?.value, password: password?.value}).subscribe(
         value => {
           console.log(value);
+          let jwt: Jwt = jwt_decode(value.token);
           this.tokenStorage.saveToken(value.token);
-          this.tokenStorage.saveUser(value);
+          this.tokenStorage.saveUser({id: jwt.id, email: jwt.sub, role: jwt.role, token: value.token});
           this.shareDataService.setLoggedIn(true);
           this.shareDataService.setLoginFailed(false);
           this.shareDataService.setRole(this.tokenStorage.getUser().role);
