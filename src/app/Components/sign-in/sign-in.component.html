@@ -48,17 +48,18 @@
             </form>
         </div>
         <div id="clickable-elements" class="clickable">
-            <p *ngIf="!flag">
+            <p *ngIf="!flag && !forgotPassword">
               <a id="flag" (click)="loadRegisterForm()">Don't have account? Register now</a>
             </p>
             <p *ngIf="flag">
               <a id="register" (click)="loadLoginForm()">You have an account? Sign in now</a>
             </p>
-            <button (click)="onSubmit()" id='btnSignIn' *ngIf="!flag" mat-button>Sign in</button>
+            <button (click)="onSubmit()" id='btnSignIn' *ngIf="!flag && !forgotPassword" mat-button>Sign in</button>
             <button (click)="register()" id='btnSignUp' *ngIf="flag" mat-button>Sign up</button>
-            <button *ngIf="forgotPassword" mat-button>Send</button>
+            <button (click)="sendChangePasswordEmail()" *ngIf="forgotPassword" mat-button>Send</button>
             <span *ngIf="!flag">
-              <a id="forgot-password" (click)="loadForgotPassword()">Forgotten Your Password?</a>
+              <a id="forgot-password" *ngIf="!forgotPassword" (click)="loadForgotPassword()">Forgotten Your Password?</a>
+              <a id="forgot-password" *ngIf="forgotPassword" href="http://localhost:4200/sign-in" routerLinkActive="router-link-active" >You remember you password? Sign in</a>
             </span>
         </div>
         <mat-spinner color="primary" id="spinner" *ngIf="loading" [diameter]="70"></mat-spinner>
