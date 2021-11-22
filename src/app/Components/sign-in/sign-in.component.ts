@@ -32,7 +32,8 @@ export class SignInComponent implements OnInit {
   forgotPassword = false;
   samePassword = true;
   userAlreadyExists = false;
-
+  registerLoading = false;
+  changePasswordLoading = false;
   loginFailStatusMessage = false;
 
   loginForm = new FormGroup({
@@ -49,18 +50,36 @@ export class SignInComponent implements OnInit {
     private mailService: MailServiceService) { }
 
   ngOnInit(): void {
+    let token = this.tokenStorage.getToken();
+    if (token != null) {
+      this.authService.isTokenExpired(token).subscribe(
+        value => {
+          if (!value.status) {
+            window.location.href = "http://localhost:4200/main";
+          }
+        },
+        e => {
+          console.log(e);
+        }
+      )
+    }
+    
   }
 
   public sendChangePasswordEmail() {
+    this.changePasswordLoading = true;
     if (this.loginForm.get("email")?.invalid) {
       this.loginForm.get('email')?.markAsTouched();
+      this.changePasswordLoading = false;
     } else {
       this.mailService.sendChangePasswordEmail(this.loginForm.get('email')?.value).subscribe(
         value => {
           console.log(value);
+          this.changePasswordLoading = false;
           window.location.href = "http://localhost:4200/sign-in"
         },
         e => {
+          this.changePasswordLoading = false;
           console.log(e);
         }
       );
@@ -125,6 +144,7 @@ export class SignInComponent implements OnInit {
   public loadLoginForm() {
     this.clearForm();
     this.forgotPassword = false;
+    this.userAlreadyExists = false;
     let element = document.getElementById('clickable-elements') as HTMLElement;
     element.style.marginBottom = '5%';
     this.loading = true;
@@ -190,6 +210,7 @@ export class SignInComponent implements OnInit {
   }
 
   public register() {
+    this.registerLoading = true;
     let email = this.loginForm.get('email');
     let password = this.loginForm.get('password');
     let password2 = this.loginForm.get('password2');
@@ -198,15 +219,20 @@ export class SignInComponent implements OnInit {
       email?.markAsTouched();
       password?.markAsTouched();
       password2?.markAsTouched();
+      this.registerLoading = false;
     }
 
     if (password?.value != password2?.value) {
       this.samePassword = false;
+      this.registerLoading = false;
       return;
     } else {
+      this.samePassword = true;
+      this.userAlreadyExists = false;
       this.authService.register({email: email?.value, password: password?.value}).subscribe(
         value => {
           console.log(value);
+          this.registerLoading = false;
           window.location.href = 'http://localhost:4200/sign-in';
         },
         e => {
@@ -214,6 +240,7 @@ export class SignInComponent implements OnInit {
           if (e.error[0] == 'User with email: ' + this.loginForm.get('email')?.value + ' already exists') {
             this.userAlreadyExists = true;
           }
+          this.registerLoading = false;
         }
       )
     }

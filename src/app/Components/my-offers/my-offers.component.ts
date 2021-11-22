@@ -9,6 +9,7 @@ import { ImageSource } from 'src/app/Models/ImageSource';
 import { Mark } from 'src/app/Models/Mark';
 import { Model } from 'src/app/Models/Model';
 import { State } from 'src/app/Models/State';
+import { AuthService } from 'src/app/Services/Auth/auth.service';
 import { CarOffersService } from 'src/app/Services/CafOffers/car-offers.service';
 import { ColorsService } from 'src/app/Services/Colors/colors.service';
 import { DrivingGearsService } from 'src/app/Services/DrivingGears/driving-gears.service';
@@ -113,9 +114,30 @@ export class MyOffersComponent implements OnInit {
     private shareDataService: ShareDataService,
     private tokenStorageService: TokenStorageService,
     private imageUploaderService: ImagesService,
+    private authService: AuthService,
     ) { }
 
   ngOnInit(): void { 
+    let token = this.tokenStorageService.getToken();
+    if (token != null) {
+      this.authService.isTokenExpired(token).subscribe(
+        value => {
+          if (value.status) {
+            console.log('niezalogowany')
+            this.shareDataService.setLoggedIn(false);
+            this.shareDataService.setRole('');
+            this.tokenStorageService.signOut();
+            window.location.href = "http://localhost:4200/sign-in";
+          }
+        },
+        e => {
+          console.log(e);
+        }
+      )
+    } else {
+      window.location.href = "http://localhost:4200/sign-in";
+    }
+
     this.loadMarks();
     this.loadModels();
     this.loadColors(); 

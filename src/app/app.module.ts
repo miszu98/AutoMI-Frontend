@@ -32,7 +32,7 @@ import { CurrencyPipe } from '@angular/common';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { ChangePasswordComponent } from './Components/change-password/change-password.component';
 import { authInterceptorProviders } from './Interceptors/Auth/auth.interceptor';
-
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -69,7 +69,8 @@ import { authInterceptorProviders } from './Interceptors/Auth/auth.interceptor';
     MatExpansionModule,
     MatSlideToggleModule,
     MatCarouselModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatProgressBarModule
   ],
   providers: [CarOfferPipe, CurrencyPipe, authInterceptorProviders],
   bootstrap: [AppComponent]

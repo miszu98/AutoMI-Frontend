@@ -20,6 +20,7 @@ export class ChangePasswordComponent implements OnInit {
 
 
   flag = false;
+  changingPasswordLoading = false;
 
 
   changePasswordForm: FormGroup = new FormGroup({
@@ -39,15 +40,17 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   public changePassword() {
+    this.changingPasswordLoading = true;
     let passwd1 = this.changePasswordForm.get("password1")?.value;
     let passwd2 = this.changePasswordForm.get("password2")?.value;
 
     if (passwd1 != passwd2) {
       this.flag = true;
+      // this.changingPasswordLoading = false;
       return;
     } else {
       this.flag = false;
-     
+      // this.changingPasswordLoading = false;
     }
 
     this.route.params.subscribe(
@@ -55,9 +58,11 @@ export class ChangePasswordComponent implements OnInit {
         this.mailService.sendNewPassword(this.changePasswordForm.get('password1')?.value, params.uuid).subscribe(
           value => {
             console.log(value);
+            // this.changingPasswordLoading = false;
             window.location.href = "http://localhost:4200/sign-in";
           },
           e => {
+            this.changingPasswordLoading = false;
             console.log(e);
           }
         );

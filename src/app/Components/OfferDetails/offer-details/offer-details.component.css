@@ -146,3 +146,7 @@ pre {
 ::ng-deep .mat-icon-button.mat-accent {
     color: #ff5200;
 }
+
+::ng-deep .mat-focus-indicator.mat-mini-fab {
+    background-color: #ff5200;
+}

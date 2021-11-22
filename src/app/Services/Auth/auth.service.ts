@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/Models/User';
 import { Credentials } from 'src/app/Models/Credentials';
+import { TokenExpired } from 'src/app/Models/TokenExpired';
 
 const AUTH_API = 'http://localhost:8080/api/auth/';
 const REGISTER_API = 'http://localhost:8080/api/users/';
@@ -30,6 +31,10 @@ export class AuthService {
       email: user.email,
       password: user.password
     }, httpOptions);
+  }
+
+  public isTokenExpired(token: string) : Observable<TokenExpired> {
+    return this.http.post<TokenExpired>("http://localhost:8080/api/auth/token-check", {token: token});
   }
 
 

@@ -62,8 +62,10 @@
               <a id="forgot-password" *ngIf="forgotPassword" href="http://localhost:4200/sign-in" routerLinkActive="router-link-active" >You remember you password? Sign in</a>
             </span>
         </div>
-        <mat-spinner color="primary" id="spinner" *ngIf="loading" [diameter]="70"></mat-spinner>
-
+        <!-- <mat-spinner color="primary" id="spinner" *ngIf="loading" [diameter]="70"></mat-spinner> -->
+        <mat-progress-bar color="primary" id="spinner" *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+        <mat-progress-bar color="primary" id="spinner" *ngIf="registerLoading" mode="indeterminate"></mat-progress-bar>
+        <mat-progress-bar color="primary" id="spinner" *ngIf="changePasswordLoading" mode="indeterminate"></mat-progress-bar>
         <div class="info">
           <ul>
             <li><a (click)="loadSupportDialog()">Support</a></li>
