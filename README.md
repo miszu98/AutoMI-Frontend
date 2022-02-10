@@ -34,26 +34,26 @@ Link to repository with backend: https://github.com/miszu98/AutoMI-Backend
 ### Register page
 #### Register is possible by provided email, password and retype password everything is validated from both side, frontend and backend
 <p align="left">
-  <img src="https://i.imgur.com/putKcnL.png" width="1100px" height="500px">
+  <img src="https://i.imgur.com/putKcnL.png" width="1100px" height="400px">
 </p>
 
 ### Main page
 #### Main page is divided by 
 <p align="left">
-  <img src="https://i.imgur.com/Jtp0PtM.png" width="1100px" height="500px">
+  <img src="https://i.imgur.com/Jtp0PtM.png" width="1100px" height="400px">
 </p>
 
 ### Add offer
 <p align="left">
-  <img src="https://i.imgur.com/KsOHDni.png" width="1100px" height="500px">
+  <img src="https://i.imgur.com/KsOHDni.png" width="1100px" height="400px">
 </p>
 <p align="left">
-  <img src="https://i.imgur.com/j8YSbsC.png" width="1100px" height="500px">
+  <img src="https://i.imgur.com/j8YSbsC.png" width="1100px" height="400px">
 </p>
 
 ### Offer details
 <p align="left">
-  <img src="https://i.imgur.com/Jtp0PtM.png" width="1100px" height="500px">
+  <img src="https://i.imgur.com/Jtp0PtM.png" width="1100px" height="400px">
 </p>
 
 ### My offers
@@ -63,7 +63,7 @@ Link to repository with backend: https://github.com/miszu98/AutoMI-Backend
 
 ### Filter usage
 <p align="left">
-  <img src="https://i.imgur.com/NwugLeK.png" width="1100px" height="500px">
+  <img src="https://i.imgur.com/NwugLeK.png" width="1100px" height="400px">
 </p>
 
 
