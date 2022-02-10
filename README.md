@@ -32,35 +32,35 @@ Link to repository with backend: https://github.com/miszu98/AutoMI-Backend
 
 ### Register page
 <p align="left">
-  <img src="https://i.imgur.com/putKcnL.png" width="700px">
+  <img src="https://i.imgur.com/putKcnL.png" width="1100px" height="500px">
 </p>
 
 ### Main page
 <p align="left">
-  <img src="https://i.imgur.com/Jtp0PtM.png" width="700px">
+  <img src="https://i.imgur.com/Jtp0PtM.png" width="1100px" height="500px">
 </p>
 
 ### Add offer
 <p align="left">
-  <img src="https://i.imgur.com/KsOHDni.png" width="700px">
+  <img src="https://i.imgur.com/KsOHDni.png" width="1100px" height="500px">
 </p>
 <p align="left">
-  <img src="https://i.imgur.com/j8YSbsC.png" width="700px">
+  <img src="https://i.imgur.com/j8YSbsC.png" width="1100px" height="500px">
 </p>
 
 ### Offer details
 <p align="left">
-  <img src="https://i.imgur.com/Jtp0PtM.png" width="700px">
+  <img src="https://i.imgur.com/Jtp0PtM.png" width="1100px" height="500px">
 </p>
 
 ### My offers
 <p align="left">
-  <img src="https://i.imgur.com/HAv7tJy.png" width="700px">
+  <img src="https://i.imgur.com/HAv7tJy.png" width="1100px" height="500px">
 </p>
 
 ### Filter usage
 <p align="left">
-  <img src="https://i.imgur.com/NwugLeK.png" width="700px">
+  <img src="https://i.imgur.com/NwugLeK.png" width="1100px" height="500px">
 </p>
 
 
