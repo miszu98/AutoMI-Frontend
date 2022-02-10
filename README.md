@@ -28,15 +28,17 @@ Link to repository with backend: https://github.com/miszu98/AutoMI-Backend
 ### Login page
 #### Login is possible by provided email and password 
 <p align="left">
-  <img src="https://i.imgur.com/bpZm4wb.png" width="1100px" height="500px">
+  <img src="https://i.imgur.com/bpZm4wb.png" width="1100px" height="450px">
 </p>
 
 ### Register page
+#### Register is possible by provided email, password and retype password everything is validated from both side, frontend and backend
 <p align="left">
   <img src="https://i.imgur.com/putKcnL.png" width="1100px" height="500px">
 </p>
 
 ### Main page
+#### Main page is divided by 
 <p align="left">
   <img src="https://i.imgur.com/Jtp0PtM.png" width="1100px" height="500px">
 </p>
