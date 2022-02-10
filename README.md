@@ -1,27 +1,70 @@
-# AutomiFrontend
+# AutoMi - Web application 
+ Portal with automotive announcements
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.0.
+This repository is responsible for frontend
 
-## Development server
+## Table of contents 
+1. [Login page](#login-page)
+2. [Register page](#register-page)
+3. [Main page](#main-page)
+4. [Add offer](#add-offer)
+5. [Offer details](#offer-details)
+6. [My offers (drop-down list)](#my-offers-(drop-down list))
+7. [Filter usage](#filter-usage)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Technologies and Dependecies
 
-## Code scaffolding
+* HTML/CSS
+* Typescript
+* Angular
+  * Angular Material 
+  * HttpClientModule
+  * RouterModule
+  * Interceptor
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Link to repository with backend: https://github.com/miszu98/AutoMI-Backend
 
-## Build
+## Images 
+### Login page
+<p align="left">
+  <img src="https://i.imgur.com/bpZm4wb.png" width="700px">
+</p>
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Register page
+<p align="left">
+  <img src="https://i.imgur.com/putKcnL.png" width="700px">
+</p>
 
-## Running unit tests
+### Main page
+<p align="left">
+  <img src="https://i.imgur.com/Jtp0PtM.png" width="700px">
+</p>
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Add offer
+<p align="left">
+  <img src="https://i.imgur.com/KsOHDni.png" width="700px">
+</p>
+<p align="left">
+  <img src="https://i.imgur.com/j8YSbsC.png" width="700px">
+</p>
 
-## Running end-to-end tests
+### Offer details
+<p align="left">
+  <img src="https://i.imgur.com/Jtp0PtM.png" width="700px">
+</p>
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### My offers (drop-down list)
+<p align="left">
+  <img src="https://i.imgur.com/HAv7tJy.png" width="700px">
+</p>
 
-## Further help
+### Filter usage
+<p align="left">
+  <img src="https://i.imgur.com/NwugLeK.png" width="700px">
+</p>
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Status of project: 
+```diff 
++ COMPLETE
+```
