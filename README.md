@@ -57,7 +57,7 @@ Main page is divided by 5 parts: First one is a left navigation bar which allow 
 </p>
 
 ### My offers
-Every offers is a drop down list with details about clicked offer
+Every offer is a drop down list with details about clicked offer
 <p align="left">
   <img src="https://i.imgur.com/HAv7tJy.png" width="1100px">
 </p>
