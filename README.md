@@ -55,7 +55,7 @@ Link to repository with backend: https://github.com/miszu98/AutoMI-Backend
 
 ### My offers
 <p align="left">
-  <img src="https://i.imgur.com/HAv7tJy.png" width="1100px" height="500px">
+  <img src="https://i.imgur.com/HAv7tJy.png" width="1100px">
 </p>
 
 ### Filter usage
