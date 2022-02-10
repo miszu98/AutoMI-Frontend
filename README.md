@@ -53,7 +53,7 @@ Main page is divided by 5 parts: First one is a left navigation bar which allow 
 
 ### Offer details
 <p align="left">
-  <img src="https://i.imgur.com/Jtp0PtM.png" width="1100px" height="50%">
+  <img src="https://i.imgur.com/B0Cbb6Z.png" width="1100px" height="50%">
 </p>
 
 ### My offers
