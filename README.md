@@ -9,7 +9,7 @@ This repository is responsible for frontend
 3. [Main page](#main-page)
 4. [Add offer](#add-offer)
 5. [Offer details](#offer-details)
-6. [My offers](#my-offers-(drop-down list))
+6. [My offers](#my-offers)
 7. [Filter usage](#filter-usage)
 
 ## Technologies and Dependecies
@@ -53,7 +53,7 @@ Link to repository with backend: https://github.com/miszu98/AutoMI-Backend
   <img src="https://i.imgur.com/Jtp0PtM.png" width="700px">
 </p>
 
-### My offers (drop-down list)
+### My offers
 <p align="left">
   <img src="https://i.imgur.com/HAv7tJy.png" width="700px">
 </p>
