@@ -9,7 +9,7 @@ This repository is responsible for frontend
 3. [Main page](#main-page)
 4. [Add offer](#add-offer)
 5. [Offer details](#offer-details)
-6. [My offers (drop-down list)](#my-offers-(drop-down list))
+6. [My offers](#my-offers-(drop-down list))
 7. [Filter usage](#filter-usage)
 
 ## Technologies and Dependecies
