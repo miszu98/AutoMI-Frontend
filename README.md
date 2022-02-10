@@ -27,7 +27,7 @@ Link to repository with backend: https://github.com/miszu98/AutoMI-Backend
 ## Images 
 ### Login page
 <p align="left">
-  <img src="https://i.imgur.com/bpZm4wb.png" width="1100px" height="auto">
+  <img src="https://i.imgur.com/bpZm4wb.png" width="1100px" height="550px">
 </p>
 
 ### Register page
