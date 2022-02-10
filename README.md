@@ -34,7 +34,7 @@ Link to repository with backend: https://github.com/miszu98/AutoMI-Backend
 ### Register page
 #### Register is possible by provided email, password and retype password everything is validated from both side, frontend and backend
 <p align="left">
-  <img src="https://i.imgur.com/putKcnL.png" width="1100px" height="400px">
+  <img src="https://i.imgur.com/putKcnL.png" width="1100px" height="50%">
 </p>
 
 ### Main page
